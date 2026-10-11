@@ -1,0 +1,61 @@
+
+# ==========================================
+# TripPilot-AI - Git Ignore Configuration
+# ==========================================
+
+# Environment Variables and Secrets
+.env
+.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Build Output
+dist/
+dist-ssr/
+build/
+coverage/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Local and Temporary Files
+*.local
+*.tmp
+*.temp
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Editor and IDE Files
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Testing and Cache
+.nyc_output/
+.cache/
+.eslintcache
+.parcel-cache/
+.vite/
+
+# Operating System Files
+Desktop.ini
+$RECYCLE.BIN/
+
+# Deployment and Debug Files
+.vercel/
+.render/
