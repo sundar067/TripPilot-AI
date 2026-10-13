@@ -1,8 +1,8 @@
 
 import api from "./api";
 
-// Get Admin Dashboard Statistics
+// Get Dashboard Analytics
 export const getAnalytics = async () => {
-  const { data } = await api.get("/admin/stats");
+  const { data } = await api.get("/admin/analytics");
   return data;
 };
