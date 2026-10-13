@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-
-// Backend URL
-const API_BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+import api from "../../services/api";
 
 function RecentActivity() {
   const [activities, setActivities] = useState([]);
@@ -12,26 +10,14 @@ function RecentActivity() {
     try {
       setLoading(true);
 
-      // Get login token
-      const token = localStorage.getItem("token");
+      const { data: result } = await api.get("/admin/activity");
 
-      // Get activity from backend
-      const response = await fetch(`${API_BASE_URL}/api/admin/activity`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.message || "Failed to fetch recent activity");
-      }
-
-      // Backend sends activity inside "data"
-      setActivities(result.data || []);
+      setActivities(result?.data || []);
     } catch (error) {
-      console.error("Recent Activity Error:", error);
+      console.error(
+        "Recent Activity Error:",
+        error.response?.data || error.message
+      );
       setActivities([]);
     } finally {
       setLoading(false);
