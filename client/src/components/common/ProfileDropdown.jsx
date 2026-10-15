@@ -22,13 +22,13 @@ const ProfileDropdown = ({ user, show, onClose, onPlanTrip, onLogout }) => {
   return (
     <div
       className="
-        absolute right-0 top-full z-[100]
-        mt-2 w-[min(18rem,calc(100vw-1.5rem))]
-        max-h-[calc(100dvh-8rem)]
-        overflow-y-auto overscroll-contain
-        rounded-2xl border border-gray-200
-        bg-white shadow-2xl
+        fixed right-3 top-20 z-[200]
+        w-[min(18rem,calc(100vw-1.5rem))]
+        max-h-[70vh] overflow-y-auto overscroll-contain
+        rounded-2xl border border-gray-200 bg-white shadow-2xl
         [scrollbar-width:thin]
+        md:absolute md:right-0 md:top-full md:z-[100]
+        md:mt-2 md:max-h-[calc(100dvh-8rem)]
       "
       role="menu"
       aria-label="Profile menu"
