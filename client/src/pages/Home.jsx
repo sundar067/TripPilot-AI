@@ -407,7 +407,7 @@ function Home() {
           "isolate" keeps hero z-indexes inside the hero, so it
           never overlaps the navbar when scrolling.
       ====================================================== */}
-      <section className="relative isolate w-full max-w-full h-[660px] min-[400px]:h-[680px] sm:h-[560px] md:h-[540px] lg:h-[560px] overflow-hidden bg-slate-900">
+      <section className="relative isolate w-full max-w-full h-[610px] min-[400px]:h-[620px] sm:h-[560px] md:h-[540px] lg:h-[560px] overflow-hidden bg-slate-900">
         {/* BACKGROUND SLIDES */}
         {states.length > 0 &&
           states.map((state, index) => (
@@ -486,7 +486,7 @@ function Home() {
 
         {/* CURRENT STATE LABEL (bottom-left) */}
         {currentState && (
-          <div className="hidden sm:flex absolute z-30 left-6 md:left-10 lg:left-14 bottom-3 items-center gap-2.5 text-white">
+          <div className="flex absolute z-30 left-3 sm:left-6 md:left-10 lg:left-14 bottom-3 items-center gap-2 text-white">
             <LocationPin className="w-8 h-10 drop-shadow-lg flex-shrink-0" />
             <div>
               <p className="text-base font-bold leading-tight drop-shadow-lg">
@@ -548,10 +548,14 @@ function Home() {
         ====================================================== */}
         {chatOpen && (
           <div
-            className="hidden lg:flex absolute z-40 right-20 bottom-6 bg-white rounded-2xl shadow-2xl overflow-hidden flex-col"
+            className="fixed z-[120] left-3 right-3 bottom-3 w-auto max-w-[520px] mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col lg:absolute lg:left-auto lg:mx-0 lg:right-20 lg:bottom-6 lg:w-auto"
             style={{
-              width: chatSize.w,
-              height: chatMinimized ? "auto" : chatSize.h,
+              width: window.innerWidth < 1024 ? "auto" : chatSize.w,
+              height: chatMinimized
+                ? "auto"
+                : window.innerWidth < 1024
+                  ? "min(70dvh, 520px)"
+                  : chatSize.h,
             }}
           >
             {/* Header */}
