@@ -1,4 +1,3 @@
-
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
@@ -6,7 +5,6 @@ import { Toaster } from "react-hot-toast";
 
 import App from "./App";
 import "./index.css";
-import "./responsive.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -19,6 +17,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         gutter={10}
         toastOptions={{
           duration: 2500,
+
           style: {
             background: "#111827",
             color: "#ffffff",
@@ -28,12 +27,14 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             fontWeight: 500,
             boxShadow: "0 10px 25px rgba(0,0,0,0.25)",
           },
+
           success: {
             iconTheme: {
               primary: "#22c55e",
               secondary: "#ffffff",
             },
           },
+
           error: {
             iconTheme: {
               primary: "#ef4444",
