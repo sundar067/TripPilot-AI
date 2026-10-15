@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -20,26 +21,32 @@ function StateCard({ state }) {
   };
 
   return (
-    <Link to={`/states/${state._id}`} className="block">
+    <Link
+      to={`/states/${state._id}`}
+      className="block h-full min-w-0 w-full"
+    >
       <div
-        className={`bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col ${
-          expanded ? "" : "min-h-[470px]"
+        className={`flex h-full min-w-0 flex-col overflow-hidden rounded-2xl bg-white shadow-md transition-all duration-300 hover:shadow-xl ${
+          expanded ? "" : "min-h-[380px] sm:min-h-[430px] lg:min-h-[470px]"
         }`}
       >
         {/* State Image */}
         <img
           src={state.image}
           alt={state.name}
-          className="w-full h-72 object-cover"
+          loading="lazy"
+          className="h-52 w-full shrink-0 object-cover sm:h-60 lg:h-72"
         />
 
         {/* Content */}
-        <div className="px-6 pt-5 pb-5 flex flex-col flex-1">
+        <div className="flex min-w-0 flex-1 flex-col px-4 pb-5 pt-4 sm:px-5 sm:pt-5 lg:px-6">
           {/* State Name */}
-          <h2 className="text-2xl font-bold mb-4">{state.name}</h2>
+          <h2 className="mb-3 break-words text-xl font-bold leading-snug text-gray-900 sm:mb-4 sm:text-2xl">
+            {state.name}
+          </h2>
 
           {/* Description */}
-          <p className="text-gray-600 text-[16px] leading-8">
+          <p className="break-words text-sm leading-7 text-gray-600 sm:text-base sm:leading-8">
             {expanded ? (
               <>
                 {description}
@@ -50,7 +57,7 @@ function StateCard({ state }) {
                     <button
                       type="button"
                       onClick={handleToggle}
-                      className="text-blue-600 font-semibold hover:underline"
+                      className="font-semibold text-blue-600 hover:underline"
                     >
                       Show Less
                     </button>
@@ -67,7 +74,7 @@ function StateCard({ state }) {
                     <button
                       type="button"
                       onClick={handleToggle}
-                      className="text-blue-600 font-semibold hover:underline"
+                      className="font-semibold text-blue-600 hover:underline"
                     >
                       View More
                     </button>
