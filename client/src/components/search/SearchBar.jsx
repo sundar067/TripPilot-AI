@@ -285,8 +285,8 @@ function SearchBar() {
   };
 
   return (
-    <div className="w-full max-w-5xl">
-      <div className="flex items-center gap-4">
+    <div className="w-full min-w-0 max-w-5xl">
+      <div className="flex w-full min-w-0 items-center gap-2 sm:gap-4">
         {/* Search */}
 
         <div className="relative flex-1">
@@ -297,7 +297,7 @@ function SearchBar() {
               onChange={handleSearch}
               onKeyDown={handleKeyDown}
               placeholder="Search states, destinations, attractions..."
-              className="flex-1 bg-transparent px-8 py-5 text-lg outline-none placeholder:text-gray-400"
+              className="min-w-0 flex-1 bg-transparent px-3 py-4 text-sm outline-none placeholder:text-gray-400 sm:px-6 sm:py-5 sm:text-lg"
             />
 
             {query.trim() !== "" && (
@@ -313,7 +313,7 @@ function SearchBar() {
 
             <button
               onClick={handleFinalSearch}
-              className="m-2 flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 px-8 py-3 font-semibold text-white transition hover:scale-105"
+              className="m-1 flex shrink-0 items-center gap-1 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 px-3 py-3 text-sm font-semibold text-white transition hover:scale-105 sm:m-2 sm:gap-2 sm:px-8 sm:text-base"
             >
               <Search size={18} />
               Search
@@ -367,7 +367,7 @@ function SearchBar() {
 
         <button
           onClick={startVoiceSearch}
-          className={`flex h-16 w-16 items-center justify-center rounded-full border bg-white shadow-lg transition-all duration-300 hover:scale-110 ${
+          className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full border bg-white shadow-lg transition-all duration-300 hover:scale-110 sm:h-16 sm:w-16 ${
             isListening
               ? "animate-pulse border-red-500 bg-red-500 text-white"
               : "border-gray-300 text-gray-700 hover:bg-gray-100"
