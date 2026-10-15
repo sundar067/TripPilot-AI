@@ -1,3 +1,4 @@
+
 import { NavLink } from "react-router-dom";
 import {
   LayoutDashboard,
@@ -9,7 +10,13 @@ import {
   Settings,
 } from "lucide-react";
 
-const ProfileDropdown = ({ user, show, onClose, onPlanTrip, onLogout }) => {
+const ProfileDropdown = ({
+  user,
+  show,
+  onClose,
+  onPlanTrip,
+  onLogout,
+}) => {
   if (!show) return null;
 
   const linkClass = ({ isActive }) =>
@@ -22,19 +29,21 @@ const ProfileDropdown = ({ user, show, onClose, onPlanTrip, onLogout }) => {
   return (
     <div
       className="
-        fixed right-3 top-20 z-[200]
-        w-[min(18rem,calc(100vw-1.5rem))]
-        max-h-[70vh] overflow-y-auto overscroll-contain
-        rounded-2xl border border-gray-200 bg-white shadow-2xl
-        [scrollbar-width:thin]
-        md:absolute md:right-0 md:top-full md:z-[100]
-        md:mt-2 md:max-h-[calc(100dvh-8rem)]
+        fixed inset-x-3 top-[calc(env(safe-area-inset-top)+5rem)]
+        z-[200] mx-auto flex w-auto max-w-sm flex-col
+        overflow-hidden rounded-2xl border border-gray-200
+        bg-white shadow-2xl
+        md:absolute md:inset-x-auto md:right-0 md:top-full
+        md:mx-0 md:mt-2 md:w-72 md:max-w-none
       "
+      style={{
+        maxHeight: "calc(100dvh - env(safe-area-inset-top) - 6rem)",
+      }}
       role="menu"
       aria-label="Profile menu"
     >
-      {/* User Info */}
-      <div className="sticky top-0 z-10 shrink-0 border-b border-blue-100 bg-gradient-to-r from-blue-50 to-indigo-50 px-4 py-4 sm:px-5">
+      {/* User information */}
+      <div className="shrink-0 border-b border-blue-100 bg-gradient-to-r from-blue-50 to-indigo-50 px-4 py-3 sm:px-5 sm:py-4">
         <div className="flex items-center gap-3">
           <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-blue-600 text-lg font-bold text-white">
             {user?.name?.charAt(0).toUpperCase() || "U"}
@@ -44,7 +53,6 @@ const ProfileDropdown = ({ user, show, onClose, onPlanTrip, onLogout }) => {
             <p className="truncate font-semibold text-gray-800">
               {user?.name || "User"}
             </p>
-
             <p className="truncate text-sm text-gray-500">
               {user?.email || "No Email"}
             </p>
@@ -52,8 +60,8 @@ const ProfileDropdown = ({ user, show, onClose, onPlanTrip, onLogout }) => {
         </div>
       </div>
 
-      {/* Menu Options */}
-      <div className="py-2">
+      {/* Scrollable menu options */}
+      <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain py-1 [scrollbar-width:thin]">
         <NavLink
           to="/dashboard"
           onClick={onClose}
@@ -115,12 +123,12 @@ const ProfileDropdown = ({ user, show, onClose, onPlanTrip, onLogout }) => {
         </NavLink>
       </div>
 
-      {/* Logout stays accessible at the bottom of the scrollable menu */}
-      <div className="shrink-0 border-t border-gray-100 bg-white">
+      {/* Logout always remains visible */}
+      <div className="shrink-0 border-t border-gray-200 bg-white">
         <button
           type="button"
           onClick={onLogout}
-          className="flex w-full items-center gap-3 px-5 py-4 text-left text-sm font-semibold text-red-600 transition hover:bg-red-50 sm:text-base"
+          className="flex min-h-12 w-full items-center gap-3 px-5 py-3 text-left text-sm font-semibold text-red-600 transition hover:bg-red-50 sm:text-base"
           role="menuitem"
         >
           <LogOut size={19} className="shrink-0" />
