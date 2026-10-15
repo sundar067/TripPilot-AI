@@ -486,7 +486,7 @@ function Home() {
 
         {/* CURRENT STATE LABEL (bottom-left) */}
         {currentState && (
-          <div className="flex absolute z-30 left-3 sm:left-6 md:left-10 lg:left-14 bottom-3 items-center gap-2 text-white">
+          <div className="flex absolute z-30 left-3 sm:left-6 md:left-10 lg:left-14 bottom-14 sm:bottom-3 items-center gap-2 text-white max-w-[65%] sm:max-w-none">
             <LocationPin className="w-8 h-10 drop-shadow-lg flex-shrink-0" />
             <div>
               <p className="text-base font-bold leading-tight drop-shadow-lg">
@@ -524,7 +524,7 @@ function Home() {
 
         {/* SLIDER DOTS (only 5 visible) */}
         {states.length > 1 && (
-          <div className="absolute z-30 bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 px-3.5 py-2 rounded-full bg-black/45 backdrop-blur-md border border-white/15">
+          <div className="absolute z-30 bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 px-3.5 py-2 rounded-full bg-black/45 backdrop-blur-md border border-white/15">
             {visibleDotIndexes.map((index) => (
               <button
                 key={states[index]._id}
@@ -548,13 +548,16 @@ function Home() {
         ====================================================== */}
         {chatOpen && (
           <div
-            className="fixed z-[120] left-3 right-3 bottom-3 w-auto max-w-[520px] mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col lg:absolute lg:left-auto lg:mx-0 lg:right-20 lg:bottom-6 lg:w-auto"
+            className="fixed z-[120] left-auto right-3 bottom-20 w-auto max-w-[520px] mx-0 bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col lg:absolute lg:left-auto lg:mx-0 lg:right-20 lg:bottom-6 lg:w-auto"
             style={{
-              width: window.innerWidth < 1024 ? "auto" : chatSize.w,
+              width:
+                window.innerWidth < 1024
+                  ? "min(360px, calc(100vw - 24px))"
+                  : chatSize.w,
               height: chatMinimized
                 ? "auto"
                 : window.innerWidth < 1024
-                  ? "min(70dvh, 520px)"
+                  ? "min(55dvh, 420px)"
                   : chatSize.h,
             }}
           >
