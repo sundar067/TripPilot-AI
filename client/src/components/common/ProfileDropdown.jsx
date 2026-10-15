@@ -1,5 +1,4 @@
 import { NavLink } from "react-router-dom";
-
 import {
   LayoutDashboard,
   Plane,
@@ -11,20 +10,36 @@ import {
 } from "lucide-react";
 
 const ProfileDropdown = ({ user, show, onClose, onPlanTrip, onLogout }) => {
-  // Hide dropdown
   if (!show) return null;
 
+  const linkClass = ({ isActive }) =>
+    `flex w-full shrink-0 items-center gap-3 px-5 py-3 text-sm sm:text-base transition ${
+      isActive
+        ? "bg-blue-50 font-medium text-blue-700"
+        : "text-gray-700 hover:bg-gray-100"
+    }`;
+
   return (
-    <div className="absolute right-0 mt-3 w-64 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-2xl">
+    <div
+      className="
+        absolute right-0 top-full z-[100]
+        mt-2 w-[min(18rem,calc(100vw-1.5rem))]
+        max-h-[calc(100dvh-8rem)]
+        overflow-y-auto overscroll-contain
+        rounded-2xl border border-gray-200
+        bg-white shadow-2xl
+        [scrollbar-width:thin]
+      "
+      role="menu"
+      aria-label="Profile menu"
+    >
       {/* User Info */}
-      <div className="border-b bg-gradient-to-r from-blue-50 to-indigo-50 px-5 py-4">
+      <div className="sticky top-0 z-10 shrink-0 border-b border-blue-100 bg-gradient-to-r from-blue-50 to-indigo-50 px-4 py-4 sm:px-5">
         <div className="flex items-center gap-3">
-          {/* User Avatar */}
-          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 text-lg font-bold text-white">
+          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-blue-600 text-lg font-bold text-white">
             {user?.name?.charAt(0).toUpperCase() || "U"}
           </div>
 
-          {/* User Details */}
           <div className="min-w-0 flex-1">
             <p className="truncate font-semibold text-gray-800">
               {user?.name || "User"}
@@ -37,78 +52,79 @@ const ProfileDropdown = ({ user, show, onClose, onPlanTrip, onLogout }) => {
         </div>
       </div>
 
-      {/* Menu */}
+      {/* Menu Options */}
       <div className="py-2">
-        {/* Dashboard */}
         <NavLink
           to="/dashboard"
           onClick={onClose}
-          className="flex items-center gap-3 px-5 py-3 text-gray-700 transition hover:bg-gray-100"
+          className={linkClass}
+          role="menuitem"
         >
-          <LayoutDashboard size={18} />
-          Dashboard
+          <LayoutDashboard size={19} className="shrink-0" />
+          <span>Dashboard</span>
         </NavLink>
 
-        {/* Plan My Trip */}
         <button
           type="button"
           onClick={onPlanTrip}
-          className="flex w-full items-center gap-3 px-5 py-3 text-left text-gray-700 transition hover:bg-gray-100"
+          className="flex w-full shrink-0 items-center gap-3 px-5 py-3 text-left text-sm text-gray-700 transition hover:bg-gray-100 sm:text-base"
+          role="menuitem"
         >
-          <Plane size={18} />
-          Plan My Trip
+          <Plane size={19} className="shrink-0" />
+          <span>Plan My Trip</span>
         </button>
 
-        {/* Wishlist */}
         <NavLink
           to="/wishlist"
           onClick={onClose}
-          className="flex items-center gap-3 px-5 py-3 text-gray-700 transition hover:bg-gray-100"
+          className={linkClass}
+          role="menuitem"
         >
-          <Heart size={18} />
-          Wishlist
+          <Heart size={19} className="shrink-0" />
+          <span>Wishlist</span>
         </NavLink>
 
-        {/* Notifications */}
         <NavLink
           to="/notifications"
           onClick={onClose}
-          className="flex items-center gap-3 px-5 py-3 text-gray-700 transition hover:bg-gray-100"
+          className={linkClass}
+          role="menuitem"
         >
-          <Bell size={18} />
-          Notifications
+          <Bell size={19} className="shrink-0" />
+          <span>Notifications</span>
         </NavLink>
 
-        {/* My Profile */}
         <NavLink
           to="/profile"
           onClick={onClose}
-          className="flex items-center gap-3 px-5 py-3 text-gray-700 transition hover:bg-gray-100"
+          className={linkClass}
+          role="menuitem"
         >
-          <User size={18} />
-          My Profile
+          <User size={19} className="shrink-0" />
+          <span>My Profile</span>
         </NavLink>
 
-        {/* Settings */}
         <NavLink
           to="/settings"
           onClick={onClose}
-          className="flex items-center gap-3 px-5 py-3 text-gray-700 transition hover:bg-gray-100"
+          className={linkClass}
+          role="menuitem"
         >
-          <Settings size={18} />
-          Settings
+          <Settings size={19} className="shrink-0" />
+          <span>Settings</span>
         </NavLink>
       </div>
 
-      {/* Logout */}
-      <div className="border-t">
+      {/* Logout stays accessible at the bottom of the scrollable menu */}
+      <div className="shrink-0 border-t border-gray-100 bg-white">
         <button
           type="button"
           onClick={onLogout}
-          className="flex w-full items-center gap-3 px-5 py-3 text-left font-medium text-red-600 transition hover:bg-red-50"
+          className="flex w-full items-center gap-3 px-5 py-4 text-left text-sm font-semibold text-red-600 transition hover:bg-red-50 sm:text-base"
+          role="menuitem"
         >
-          <LogOut size={18} />
-          Logout
+          <LogOut size={19} className="shrink-0" />
+          <span>Logout</span>
         </button>
       </div>
     </div>
