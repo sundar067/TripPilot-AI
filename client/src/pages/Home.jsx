@@ -407,7 +407,7 @@ function Home() {
           "isolate" keeps hero z-indexes inside the hero, so it
           never overlaps the navbar when scrolling.
       ====================================================== */}
-      <section className="relative isolate w-full max-w-full h-[600px] min-[400px]:h-[560px] sm:h-[520px] md:h-[540px] lg:h-[560px] overflow-hidden bg-slate-900">
+      <section className="relative isolate w-full max-w-full h-[660px] min-[400px]:h-[680px] sm:h-[560px] md:h-[540px] lg:h-[560px] overflow-hidden bg-slate-900">
         {/* BACKGROUND SLIDES */}
         {states.length > 0 &&
           states.map((state, index) => (
@@ -711,7 +711,7 @@ function Home() {
             OPEN CHAT BUTTON (bottom-right + "Chat with AI" label)
         ====================================================== */}
         {!chatOpen && (
-          <div className="hidden lg:flex absolute z-40 right-16 bottom-6 flex-col items-center gap-2">
+          <div className="flex fixed z-[100] right-4 bottom-5 lg:absolute lg:right-16 lg:bottom-6 flex-col items-center gap-2">
             <button
               type="button"
               onClick={() => setChatOpen(true)}
