@@ -12,6 +12,8 @@ import {
   Plane,
   LogIn,
   UserPlus,
+  Menu,
+  X,
 } from "lucide-react";
 
 import NotificationDropdown from "./NotificationDropdown";
@@ -30,23 +32,18 @@ const Navbar = () => {
   const location = useLocation();
 
   const token = localStorage.getItem("token");
-
   const user = JSON.parse(localStorage.getItem("user"));
 
   const [showMenu, setShowMenu] = useState(false);
-
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
-
   const [notifications, setNotifications] = useState([]);
-
   const [loadingNotifications, setLoadingNotifications] = useState(false);
 
   const notificationRef = useRef(null);
-
   const profileRef = useRef(null);
 
   const isHomeActive = location.pathname === "/";
-
   const isPlanTripActive = location.pathname === "/plan-trip";
 
   const navStyle = ({ isActive }) =>
@@ -61,15 +58,20 @@ const Navbar = () => {
       isActive ? "text-blue-600" : "text-gray-500 group-hover:text-blue-600"
     }`;
 
+  const mobileLinkStyle = ({ isActive }) =>
+    `flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition ${
+      isActive
+        ? "bg-blue-50 text-blue-700"
+        : "text-gray-700 hover:bg-gray-50 hover:text-blue-600"
+    }`;
+
   // Fetch notifications
   const fetchNotifications = async () => {
     if (!token) return;
 
     try {
       setLoadingNotifications(true);
-
       const data = await getNotifications();
-
       setNotifications(data);
     } catch (error) {
       console.error(error);
@@ -102,12 +104,10 @@ const Navbar = () => {
 
     const handleNotification = (notification) => {
       console.log("🔔 Realtime Notification:", notification);
-
       setNotifications((prev) => [notification, ...prev]);
     };
 
     socket.on("connect", handleConnect);
-
     socket.on("new-notification", handleNotification);
 
     if (socket.connected) {
@@ -116,12 +116,11 @@ const Navbar = () => {
 
     return () => {
       socket.off("connect", handleConnect);
-
       socket.off("new-notification", handleNotification);
     };
   }, [token, user]);
 
-  // Close dropdowns
+  // Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -131,7 +130,10 @@ const Navbar = () => {
         setShowNotifications(false);
       }
 
-      if (profileRef.current && !profileRef.current.contains(event.target)) {
+      if (
+        profileRef.current &&
+        !profileRef.current.contains(event.target)
+      ) {
         setShowMenu(false);
       }
     };
@@ -143,9 +145,34 @@ const Navbar = () => {
     };
   }, []);
 
+  // Close mobile navigation after route changes
+  useEffect(() => {
+    setShowMobileMenu(false);
+  }, [location.pathname]);
+
   const unreadCount = notifications.filter(
     (notification) => !notification.isRead,
   ).length;
+
+  // Toggle notifications and mark them as read
+  const handleToggleNotifications = async () => {
+    setShowNotifications((prev) => !prev);
+
+    if (unreadCount > 0) {
+      try {
+        await markAllNotificationsAsRead();
+
+        setNotifications((prev) =>
+          prev.map((item) => ({
+            ...item,
+            isRead: true,
+          })),
+        );
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  };
 
   // Notification click
   const handleNotificationClick = async (notification) => {
@@ -172,13 +199,14 @@ const Navbar = () => {
   // View all notifications
   const handleViewAll = () => {
     setShowNotifications(false);
-
+    setShowMobileMenu(false);
     navigate("/notifications");
   };
 
   // Plan trip
   const handlePlanTripClick = () => {
     if (!token) {
+      setShowMobileMenu(false);
       toast.error("Please login first to plan your trip");
 
       setTimeout(() => {
@@ -189,44 +217,54 @@ const Navbar = () => {
     }
 
     setShowMenu(false);
-
+    setShowMobileMenu(false);
     navigate("/plan-trip");
   };
 
   // Logout
   const handleLogout = () => {
     localStorage.removeItem("token");
-
     localStorage.removeItem("user");
 
     socket.disconnect();
 
+    setShowMenu(false);
+    setShowMobileMenu(false);
+
     navigate("/login");
   };
 
+  const handleMobileNavigation = () => {
+    setShowMobileMenu(false);
+    setShowNotifications(false);
+  };
+
   return (
-    <nav className="sticky top-0 z-50 border-b border-gray-100 bg-white shadow-sm">
-      <div className="mx-auto flex max-w-[1450px] items-center justify-between px-4 py-2.5 sm:px-5">
+    <nav className="sticky top-0 z-50 w-full max-w-full border-b border-gray-100 bg-white shadow-sm">
+      <div className="mx-auto flex w-full max-w-[1450px] min-w-0 items-center justify-between gap-2 px-3 py-2.5 sm:px-5">
         {/* Logo */}
-        <Link to="/" className="group flex items-center gap-2.5">
-          <div className="relative flex h-11 w-11 items-center justify-center rounded-xl border border-blue-200 bg-gradient-to-br from-blue-100 via-sky-100 to-indigo-100 shadow-sm transition duration-200 group-hover:scale-105">
-            <FaGlobeAsia className="text-[27px] text-blue-500" />
+        <Link
+          to="/"
+          onClick={handleMobileNavigation}
+          className="group flex min-w-0 shrink-0 items-center gap-2 sm:gap-2.5"
+        >
+          <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-blue-200 bg-gradient-to-br from-blue-100 via-sky-100 to-indigo-100 shadow-sm transition duration-200 group-hover:scale-105 sm:h-11 sm:w-11">
+            <FaGlobeAsia className="text-[25px] text-blue-500 sm:text-[27px]" />
 
             <div className="absolute inset-0 flex items-center justify-center">
-              <FaHome className="text-[16px] text-white" />
+              <FaHome className="text-[15px] text-white sm:text-[16px]" />
             </div>
 
             <FaPlaneDeparture className="absolute -right-1 -top-1 rounded-full bg-white p-[2px] text-[11px] text-indigo-600 shadow" />
           </div>
 
-          <span className="text-[23px] font-extrabold tracking-tight text-blue-600 transition group-hover:text-indigo-600">
+          <span className="text-lg font-extrabold tracking-tight text-blue-600 transition group-hover:text-indigo-600 sm:text-[23px]">
             TripPilot AI
           </span>
         </Link>
 
-        {/* Navigation */}
-        <div className="flex items-center gap-3 sm:gap-5">
-          {/* Home */}
+        {/* Desktop navigation: unchanged functionality */}
+        <div className="hidden items-center gap-3 md:flex lg:gap-5">
           <NavLink
             to="/"
             className={() =>
@@ -242,11 +280,9 @@ const Navbar = () => {
               strokeWidth={2}
               className={navIconStyle(isHomeActive)}
             />
-
             <span className="text-[13px]">Home</span>
           </NavLink>
 
-          {/* States */}
           <NavLink to="/states" className={navStyle}>
             {({ isActive }) => (
               <>
@@ -255,13 +291,11 @@ const Navbar = () => {
                   strokeWidth={2}
                   className={navIconStyle(isActive)}
                 />
-
                 <span className="text-[13px]">States</span>
               </>
             )}
           </NavLink>
 
-          {/* Destinations */}
           <NavLink to="/destinations" className={navStyle}>
             {({ isActive }) => (
               <>
@@ -270,13 +304,11 @@ const Navbar = () => {
                   strokeWidth={2}
                   className={navIconStyle(isActive)}
                 />
-
                 <span className="text-[13px]">Destinations</span>
               </>
             )}
           </NavLink>
 
-          {/* Plan My Trip */}
           <button
             type="button"
             onClick={handlePlanTripClick}
@@ -291,14 +323,11 @@ const Navbar = () => {
               strokeWidth={2}
               className={navIconStyle(isPlanTripActive)}
             />
-
             <span className="text-[13px]">Plan My Trip</span>
           </button>
 
-          {/* Logged out */}
           {!token ? (
             <div className="ml-2 flex items-center gap-3">
-              {/* Login Button */}
               <NavLink
                 to="/login"
                 className={({ isActive }) =>
@@ -310,11 +339,9 @@ const Navbar = () => {
                 }
               >
                 <LogIn size={17} />
-
                 <span>Login</span>
               </NavLink>
 
-              {/* Signup Button */}
               <NavLink
                 to="/signup"
                 className={({ isActive }) =>
@@ -326,34 +353,15 @@ const Navbar = () => {
                 }
               >
                 <UserPlus size={17} />
-
                 <span>Signup</span>
               </NavLink>
             </div>
           ) : (
-            <div className="ml-3 flex items-center gap-5 sm:ml-4 sm:gap-6">
-              {/* Notifications */}
+            <div className="ml-3 flex items-center gap-5 lg:ml-4 lg:gap-6">
               <div className="relative" ref={notificationRef}>
                 <button
                   type="button"
-                  onClick={async () => {
-                    setShowNotifications((prev) => !prev);
-
-                    if (unreadCount > 0) {
-                      try {
-                        await markAllNotificationsAsRead();
-
-                        setNotifications((prev) =>
-                          prev.map((item) => ({
-                            ...item,
-                            isRead: true,
-                          })),
-                        );
-                      } catch (error) {
-                        console.error(error);
-                      }
-                    }
-                  }}
+                  onClick={handleToggleNotifications}
                   className="group relative flex h-9 w-9 items-center justify-center rounded-full transition hover:bg-blue-50"
                   aria-label="Notifications"
                 >
@@ -381,7 +389,6 @@ const Navbar = () => {
                 )}
               </div>
 
-              {/* Profile */}
               <div className="relative" ref={profileRef}>
                 <button
                   type="button"
@@ -403,7 +410,166 @@ const Navbar = () => {
             </div>
           )}
         </div>
+
+        {/* Mobile hamburger button */}
+        <button
+          type="button"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-gray-200 text-gray-700 transition hover:bg-blue-50 hover:text-blue-600 md:hidden"
+          onClick={() => setShowMobileMenu((prev) => !prev)}
+          aria-label={
+            showMobileMenu ? "Close navigation menu" : "Open navigation menu"
+          }
+          aria-expanded={showMobileMenu}
+        >
+          {showMobileMenu ? <X size={23} /> : <Menu size={23} />}
+        </button>
       </div>
+
+      {/* Mobile navigation menu */}
+      {showMobileMenu && (
+        <div className="w-full border-t border-gray-100 bg-white px-3 pb-4 pt-3 shadow-lg md:hidden sm:px-5">
+          <div className="mx-auto flex w-full max-w-[1450px] flex-col gap-1">
+            <NavLink
+              to="/"
+              onClick={handleMobileNavigation}
+              className={mobileLinkStyle}
+            >
+              <House size={19} />
+              <span>Home</span>
+            </NavLink>
+
+            <NavLink
+              to="/states"
+              onClick={handleMobileNavigation}
+              className={mobileLinkStyle}
+            >
+              <Map size={19} />
+              <span>States</span>
+            </NavLink>
+
+            <NavLink
+              to="/destinations"
+              onClick={handleMobileNavigation}
+              className={mobileLinkStyle}
+            >
+              <MapPinned size={19} />
+              <span>Destinations</span>
+            </NavLink>
+
+            <button
+              type="button"
+              onClick={handlePlanTripClick}
+              className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-sm font-medium transition ${
+                isPlanTripActive
+                  ? "bg-blue-50 text-blue-700"
+                  : "text-gray-700 hover:bg-gray-50 hover:text-blue-600"
+              }`}
+            >
+              <Plane size={19} />
+              <span>Plan My Trip</span>
+            </button>
+
+            <div className="my-2 border-t border-gray-100" />
+
+            {!token ? (
+              <div className="grid grid-cols-2 gap-2">
+                <NavLink
+                  to="/login"
+                  onClick={handleMobileNavigation}
+                  className={({ isActive }) =>
+                    `flex items-center justify-center gap-2 rounded-xl border px-3 py-3 text-sm font-semibold transition ${
+                      isActive
+                        ? "border-blue-600 bg-blue-50 text-blue-700"
+                        : "border-gray-200 text-gray-700 hover:bg-blue-50"
+                    }`
+                  }
+                >
+                  <LogIn size={17} />
+                  <span>Login</span>
+                </NavLink>
+
+                <NavLink
+                  to="/signup"
+                  onClick={handleMobileNavigation}
+                  className={({ isActive }) =>
+                    `flex items-center justify-center gap-2 rounded-xl px-3 py-3 text-sm font-semibold text-white transition ${
+                      isActive
+                        ? "bg-blue-700"
+                        : "bg-gradient-to-r from-blue-600 to-indigo-600"
+                    }`
+                  }
+                >
+                  <UserPlus size={17} />
+                  <span>Signup</span>
+                </NavLink>
+              </div>
+            ) : (
+              <>
+                {/* Mobile notifications */}
+                <div className="relative" ref={notificationRef}>
+                  <button
+                    type="button"
+                    onClick={handleToggleNotifications}
+                    className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-sm font-medium text-gray-700 transition hover:bg-gray-50 hover:text-blue-600"
+                  >
+                    <span className="relative flex">
+                      <Bell size={19} />
+                      {unreadCount > 0 && (
+                        <span className="absolute -right-2 -top-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[9px] font-bold text-white">
+                          {unreadCount > 99 ? "99+" : unreadCount}
+                        </span>
+                      )}
+                    </span>
+                    <span>Notifications</span>
+                    {unreadCount > 0 && (
+                      <span className="ml-auto text-xs text-gray-500">
+                        {unreadCount} unread
+                      </span>
+                    )}
+                  </button>
+
+                  {showNotifications && (
+                    <div className="relative mt-1 w-full">
+                      <NotificationDropdown
+                        notifications={notifications}
+                        loading={loadingNotifications}
+                        unreadCount={unreadCount}
+                        onNotificationClick={handleNotificationClick}
+                        onViewAll={handleViewAll}
+                      />
+                    </div>
+                  )}
+                </div>
+
+                {/* Mobile profile and logout */}
+                <div className="relative" ref={profileRef}>
+                  <button
+                    type="button"
+                    onClick={() => setShowMenu((prev) => !prev)}
+                    className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-sm font-medium text-gray-700 transition hover:bg-gray-50 hover:text-blue-600"
+                  >
+                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-600 text-sm font-bold text-white">
+                      {user?.name?.charAt(0).toUpperCase() || "U"}
+                    </span>
+                    <span>{user?.name || "My Profile"}</span>
+                    <span className="ml-auto text-xs text-gray-500">
+                      {showMenu ? "Close" : "Account"}
+                    </span>
+                  </button>
+
+                  <ProfileDropdown
+                    user={user}
+                    show={showMenu}
+                    onClose={() => setShowMenu(false)}
+                    onPlanTrip={handlePlanTripClick}
+                    onLogout={handleLogout}
+                  />
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </nav>
   );
 };
