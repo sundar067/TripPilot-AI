@@ -548,16 +548,16 @@ function Home() {
         ====================================================== */}
         {chatOpen && (
           <div
-            className="fixed z-[120] left-auto right-3 bottom-20 w-auto max-w-[520px] mx-0 bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col lg:absolute lg:left-auto lg:mx-0 lg:right-20 lg:bottom-6 lg:w-auto"
+            className="fixed z-[120] right-3 bottom-24 w-auto max-w-[520px] mx-0 bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col lg:absolute lg:left-auto lg:mx-0 lg:right-20 lg:bottom-6 lg:w-auto"
             style={{
               width:
                 window.innerWidth < 1024
-                  ? "min(360px, calc(100vw - 24px))"
+                  ? "min(320px, calc(100vw - 24px))"
                   : chatSize.w,
               height: chatMinimized
                 ? "auto"
                 : window.innerWidth < 1024
-                  ? "min(55dvh, 420px)"
+                  ? "min(45dvh, 340px)"
                   : chatSize.h,
             }}
           >
