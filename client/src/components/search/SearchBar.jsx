@@ -285,11 +285,11 @@ function SearchBar() {
   };
 
   return (
-    <div className="w-full min-w-0 max-w-5xl">
+    <div className="w-full min-w-0 max-w-full sm:max-w-5xl">
       <div className="flex w-full min-w-0 items-center gap-2 sm:gap-4">
         {/* Search */}
 
-        <div className="relative flex-1">
+        <div className="relative min-w-0 flex-1">
           <div className="flex items-center rounded-full border border-gray-300 bg-white shadow-xl transition-all duration-300 focus-within:border-blue-500 focus-within:ring-4 focus-within:ring-blue-100">
             <input
               type="text"
@@ -313,7 +313,7 @@ function SearchBar() {
 
             <button
               onClick={handleFinalSearch}
-              className="m-1 flex shrink-0 items-center gap-1 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 px-3 py-3 text-sm font-semibold text-white transition hover:scale-105 sm:m-2 sm:gap-2 sm:px-8 sm:text-base"
+              className="m-1 flex shrink-0 items-center gap-1 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 px-2.5 py-3 text-sm font-semibold text-white transition hover:scale-105 sm:m-2 sm:gap-2 sm:px-8 sm:text-base"
             >
               <Search size={18} />
               Search
