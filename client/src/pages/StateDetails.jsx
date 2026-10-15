@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -41,40 +42,48 @@ function StateDetails() {
   }
 
   return (
-    <div className="p-8">
+    <main className="w-full min-w-0 max-w-full overflow-x-clip px-4 py-5 sm:px-6 sm:py-8 lg:px-8">
+      {/* State Image */}
       <img
         src={state.image}
         alt={state.name}
-        className="w-full h-96 object-cover rounded-lg"
+        className="h-56 w-full rounded-xl object-cover sm:h-72 md:h-80 lg:h-96"
         onError={(e) => {
           e.target.src =
             "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee";
         }}
       />
 
-      <h1 className="text-4xl font-bold mt-6">{state.name}</h1>
+      {/* State Information */}
+      <h1 className="mt-5 break-words text-2xl font-bold leading-tight text-gray-900 sm:mt-6 sm:text-3xl lg:text-4xl">
+        {state.name}
+      </h1>
 
-      <p className="text-gray-700 mt-4 text-lg">{state.description}</p>
+      <p className="mt-3 break-words text-base leading-relaxed text-gray-700 sm:mt-4 sm:text-lg">
+        {state.description}
+      </p>
 
-      <div className="mt-10">
-        <h2 className="text-3xl font-bold mb-6">
+      {/* Destinations */}
+      <section className="mt-8 min-w-0 sm:mt-10">
+        <h2 className="mb-5 break-words text-2xl font-bold leading-snug text-gray-900 sm:mb-6 sm:text-3xl">
           Best Places to Visit in {state.name}
         </h2>
 
         {destinations.length === 0 ? (
-          <p className="text-gray-600">No tourist places added yet.</p>
+          <p className="text-sm leading-relaxed text-gray-600 sm:text-base">
+            No tourist places added yet.
+          </p>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid w-full min-w-0 grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6">
             {destinations.map((destination) => (
-              <DestinationCard
-                key={destination._id}
-                destination={destination}
-              />
+              <div key={destination._id} className="min-w-0">
+                <DestinationCard destination={destination} />
+              </div>
             ))}
           </div>
         )}
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }
 
