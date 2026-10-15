@@ -399,7 +399,7 @@ function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen w-full max-w-full overflow-x-clip bg-white flex flex-col">
       <style>{searchStyles}</style>
 
       {/* =====================================================
@@ -407,7 +407,7 @@ function Home() {
           "isolate" keeps hero z-indexes inside the hero, so it
           never overlaps the navbar when scrolling.
       ====================================================== */}
-      <section className="relative isolate h-[520px] md:h-[540px] lg:h-[560px] overflow-hidden bg-slate-900">
+      <section className="relative isolate w-full max-w-full h-[600px] min-[400px]:h-[560px] sm:h-[520px] md:h-[540px] lg:h-[560px] overflow-hidden bg-slate-900">
         {/* BACKGROUND SLIDES */}
         {states.length > 0 &&
           states.map((state, index) => (
@@ -449,7 +449,7 @@ function Home() {
         {/* HERO CONTENT
             z-50 so the search dropdown is above dots / label / chat.
             pointer-events-none on wrapper so arrows, dots, chat stay clickable. */}
-        <div className="relative z-50 h-full max-w-7xl mx-auto px-6 md:px-10 lg:px-14 pb-10 flex items-center pointer-events-none">
+        <div className="relative z-50 h-full w-full max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-14 pt-8 sm:pt-0 pb-16 sm:pb-10 flex items-center pointer-events-none">
           <div className="relative w-full lg:w-[62%] text-white pointer-events-auto">
             {/* Tag pill */}
             <div className="inline-flex items-center gap-2 mb-4 px-3 py-1.5 rounded-full bg-black/45 backdrop-blur-md border border-white/25 text-xs font-medium text-white shadow-md">
@@ -458,7 +458,7 @@ function Home() {
             </div>
 
             {/* HEADING */}
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-[64px] font-extrabold leading-[0.95] tracking-tight mb-4 text-white drop-shadow-[0_5px_12px_rgba(0,0,0,0.85)]">
+            <h1 className="text-3xl min-[380px]:text-4xl sm:text-5xl md:text-6xl lg:text-[64px] font-extrabold leading-[1.05] tracking-tight mb-4 text-white drop-shadow-[0_5px_12px_rgba(0,0,0,0.85)]">
               Discover India
               <br />
               <span className="text-blue-400 drop-shadow-[0_4px_10px_rgba(0,0,0,0.9)]">
@@ -747,7 +747,7 @@ function Home() {
       ====================================================== */}
       <section className="bg-white px-6 md:px-10 lg:px-16 py-8">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-end justify-between mb-5 gap-3">
+          <div className="flex flex-col min-[420px]:flex-row min-[420px]:items-end min-[420px]:justify-between mb-5 gap-3">
             <div>
               <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900">
                 Explore India
