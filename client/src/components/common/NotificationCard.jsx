@@ -62,16 +62,16 @@ function NotificationCard({
   const getIcon = () => {
     switch (notification.type) {
       case "trip":
-        return <FaPlaneDeparture className="text-xl text-blue-600" />;
+        return <FaPlaneDeparture className="text-lg text-blue-600 sm:text-xl" />;
 
       case "wishlist":
-        return <FaHeart className="text-xl text-pink-500" />;
+        return <FaHeart className="text-lg text-pink-500 sm:text-xl" />;
 
       case "admin":
-        return <FaUserShield className="text-xl text-purple-600" />;
+        return <FaUserShield className="text-lg text-purple-600 sm:text-xl" />;
 
       default:
-        return <FaBell className="text-xl text-gray-600" />;
+        return <FaBell className="text-lg text-gray-600 sm:text-xl" />;
     }
   };
 
@@ -132,18 +132,18 @@ function NotificationCard({
   return (
     <div
       onClick={handleNotificationClick}
-      className={`group relative cursor-pointer border-l-4 ${getBorderColor()}
+      className={`group relative w-full min-w-0 cursor-pointer border-l-4 ${getBorderColor()}
 ${
   variant === "dropdown"
-    ? "px-4 py-3"
-    : "rounded-2xl p-5 shadow-sm hover:shadow-xl"
+    ? "px-3 py-3 sm:px-4"
+    : "rounded-xl p-3 shadow-sm hover:shadow-xl sm:rounded-2xl sm:p-5"
 }
 bg-white transition-all duration-300`}
     >
       {/* Unread Dot */}
 
       {!notification.isRead && (
-        <span className="absolute right-5 top-5 h-3 w-3 animate-pulse rounded-full bg-blue-500"></span>
+        <span className="absolute right-3 top-3 h-2.5 w-2.5 animate-pulse rounded-full bg-blue-500 sm:right-5 sm:top-5 sm:h-3 sm:w-3"></span>
       )}
 
       {/* Delete Button */}
@@ -151,33 +151,39 @@ bg-white transition-all duration-300`}
       {variant === "page" && (
         <button
           onClick={handleDelete}
-          className="absolute right-4 bottom-4 flex h-10 w-10 items-center justify-center rounded-full bg-red-50 text-red-500 opacity-0 transition-all duration-200 hover:bg-red-100 hover:text-red-600 group-hover:opacity-100"
+          className="absolute bottom-3 right-3 flex h-9 w-9 items-center justify-center rounded-full bg-red-50 text-red-500 transition-all duration-200 hover:bg-red-100 hover:text-red-600 sm:bottom-4 sm:right-4 sm:h-10 sm:w-10 sm:opacity-0 sm:group-hover:opacity-100"
         >
           <FaTrash />
         </button>
       )}
 
-      <div className="flex items-start gap-4">
+      <div className="flex min-w-0 items-start gap-3 sm:gap-4">
         {/* Notification Icon */}
 
-        <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-xl bg-gray-100">
+        <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-gray-100 sm:h-14 sm:w-14 sm:rounded-xl">
           {getIcon()}
         </div>
 
         {/* Notification Content */}
 
-        <div className={variant === "page" ? "flex-1 pr-12" : "flex-1"}>
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <h3 className="text-lg font-semibold text-gray-800">
+        <div
+          className={
+            variant === "page"
+              ? "min-w-0 flex-1 pb-10 sm:pr-12 sm:pb-0"
+              : "min-w-0 flex-1"
+          }
+        >
+          <div className="flex min-w-0 flex-col gap-1 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-2">
+            <h3 className="break-words pr-4 text-base font-semibold text-gray-800 sm:pr-0 sm:text-lg">
               {notification.title}
             </h3>
 
-            <span className="text-sm text-gray-500">
+            <span className="text-xs text-gray-500 sm:text-sm">
               {getRelativeTime(notification.createdAt)}
             </span>
           </div>
 
-          <p className="mt-2 leading-relaxed text-gray-600">
+          <p className="mt-2 break-words text-sm leading-relaxed text-gray-600 sm:text-base">
             {notification.message}
           </p>
         </div>
