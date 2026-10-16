@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 
@@ -63,7 +64,10 @@ function Login() {
         }
 
         // Join user room
-        socket.emit("join", user._id || user.id);
+        socket.emit(
+          "join",
+          user._id || user.id
+        );
 
         // Join admin room
         if (user.role === "admin") {
@@ -178,7 +182,8 @@ function Login() {
       return;
     }
 
-    window.location.href = "http://localhost:5000/api/auth/google";
+    // Use the configured backend URL instead of localhost
+    window.location.href = `${import.meta.env.VITE_API_URL}/auth/google`;
   };
 
   return (
