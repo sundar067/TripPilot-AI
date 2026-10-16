@@ -218,7 +218,7 @@ function Footer() {
               >
                 <Phone size={18} className="shrink-0 text-blue-400" />
 
-                <span>+91 9389697337</span>
+                <span>+91 xxxxxx7337</span>
               </a>
 
               {/* Email */}
@@ -230,7 +230,7 @@ function Footer() {
                 <Mail size={18} className="mt-0.5 shrink-0 text-blue-400" />
 
                 <span className="min-w-0 break-all">
-                  singhsundar9167@gmail.com
+                  xxxx123@gmail.com
                 </span>
               </a>
 
