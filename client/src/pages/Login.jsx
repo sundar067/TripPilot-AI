@@ -10,44 +10,33 @@ import { socket } from "../lib/socket";
 
 function Login() {
   // Form data
-
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
   // Show password
-
   const [showPassword, setShowPassword] = useState(false);
 
   // Google login loading
-
   const [googleLoading, setGoogleLoading] = useState(false);
 
   // Prevent Google callback from running twice
-
   const googleLoginProcessed = useRef(false);
 
   // Navigation
-
   const navigate = useNavigate();
   const location = useLocation();
 
   // Handle Google callback
-
   useEffect(() => {
     const completeGoogleLogin = async () => {
       const searchParams = new URLSearchParams(location.search);
-
       const googleToken = searchParams.get("googleToken");
-
-      // If this is not a Google callback, do nothing
 
       if (!googleToken) {
         return;
       }
-
-      // Prevent duplicate execution
 
       if (googleLoginProcessed.current) {
         return;
@@ -59,66 +48,58 @@ function Login() {
         setGoogleLoading(true);
 
         // Save Google JWT token
-
         localStorage.setItem("token", googleToken);
 
         // Get logged-in user details
-
         const response = await api.get("/auth/profile");
-
         const user = response.data.user;
 
         // Save user
-
         localStorage.setItem("user", JSON.stringify(user));
 
         // Connect socket
-
         if (!socket.connected) {
           socket.connect();
         }
 
         // Join user room
-
         socket.emit("join", user._id || user.id);
 
         // Join admin room
-
         if (user.role === "admin") {
           socket.emit("join-admin");
         }
 
         // Remove Google token from URL
-
         window.history.replaceState({}, document.title, "/login");
 
-        // Show success toast only once
-
+        // Success toast
         toast.success("Login successful", {
           id: "google-login-success",
           position: "top-center",
         });
 
         // Redirect to home
-
         navigate("/", {
           replace: true,
         });
       } catch (error) {
         console.error(
           "GOOGLE LOGIN ERROR:",
-          error.response?.data || error.message,
+          error.response?.data || error.message
         );
 
         // Remove invalid token
-
         localStorage.removeItem("token");
         localStorage.removeItem("user");
 
-        toast.error(error.response?.data?.message || "Google login failed", {
-          id: "google-login-error",
-          position: "top-center",
-        });
+        toast.error(
+          error.response?.data?.message || "Google login failed",
+          {
+            id: "google-login-error",
+            position: "top-center",
+          }
+        );
 
         navigate("/login", {
           replace: true,
@@ -132,7 +113,6 @@ function Login() {
   }, [location.search, navigate]);
 
   // Handle input change
-
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -141,7 +121,6 @@ function Login() {
   };
 
   // Handle normal login
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -152,38 +131,34 @@ function Login() {
       });
 
       // Save token
-
       localStorage.setItem("token", response.data.token);
 
       // Save user
-
       localStorage.setItem("user", JSON.stringify(response.data.user));
 
       // Connect socket
-
       if (!socket.connected) {
         socket.connect();
       }
 
       // Join user room
-
-      socket.emit("join", response.data.user._id || response.data.user.id);
+      socket.emit(
+        "join",
+        response.data.user._id || response.data.user.id
+      );
 
       // Join admin room
-
       if (response.data.user.role === "admin") {
         socket.emit("join-admin");
       }
 
       // Success toast
-
       toast.success("Login successful", {
         id: "normal-login-success",
         position: "top-center",
       });
 
       // Redirect to home
-
       navigate("/", {
         replace: true,
       });
@@ -198,7 +173,6 @@ function Login() {
   };
 
   // Start Google login
-
   const handleGoogleLogin = () => {
     if (googleLoading) {
       return;
@@ -208,17 +182,16 @@ function Login() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100">
-      <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-md">
+    <div className="flex min-h-screen w-full items-center justify-center overflow-x-hidden bg-gray-100 px-3 py-6 sm:px-6 sm:py-8">
+      <div className="w-full max-w-md rounded-lg bg-white p-5 shadow-md sm:p-8">
         {/* Heading */}
+        <h2 className="mb-6 text-center text-2xl font-bold text-gray-900">
+          Login
+        </h2>
 
-        <h2 className="mb-6 text-center text-2xl font-bold">Login</h2>
-
-        {/* Login form */}
-
+        {/* Login Form */}
         <form onSubmit={handleSubmit}>
           {/* Email */}
-
           <input
             type="email"
             name="email"
@@ -226,12 +199,12 @@ function Login() {
             value={formData.email}
             onChange={handleChange}
             disabled={googleLoading}
-            className="mb-4 w-full rounded-md border p-3 disabled:cursor-not-allowed disabled:opacity-70"
+            autoComplete="email"
+            className="mb-4 w-full min-w-0 rounded-md border border-gray-300 p-3 text-base outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100 disabled:cursor-not-allowed disabled:opacity-70"
             required
           />
 
           {/* Password */}
-
           <div className="relative mb-4">
             <input
               type={showPassword ? "text" : "password"}
@@ -240,7 +213,8 @@ function Login() {
               value={formData.password}
               onChange={handleChange}
               disabled={googleLoading}
-              className="w-full rounded-md border p-3 pr-12 disabled:cursor-not-allowed disabled:opacity-70"
+              autoComplete="current-password"
+              className="w-full min-w-0 rounded-md border border-gray-300 p-3 pr-12 text-base outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100 disabled:cursor-not-allowed disabled:opacity-70"
               required
             />
 
@@ -248,14 +222,14 @@ function Login() {
               type="button"
               disabled={googleLoading}
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-3 text-gray-500 hover:text-gray-700 disabled:cursor-not-allowed"
+              aria-label={showPassword ? "Hide password" : "Show password"}
+              className="absolute right-3 top-1/2 -translate-y-1/2 rounded p-1 text-gray-500 transition hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 disabled:cursor-not-allowed"
             >
               {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
           </div>
 
-          {/* Forgot password */}
-
+          {/* Forgot Password */}
           <div className="mb-4 text-right">
             <Link
               to="/forgot-password"
@@ -265,36 +239,39 @@ function Login() {
             </Link>
           </div>
 
-          {/* Login button */}
-
+          {/* Login Button */}
           <button
             type="submit"
             disabled={googleLoading}
-            className="w-full rounded-md bg-green-600 p-3 text-white transition hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-70"
+            className="w-full rounded-md bg-green-600 p-3 font-semibold text-white transition hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-70"
           >
             Login
           </button>
         </form>
 
         {/* Divider */}
-
-        <div className="my-6 flex items-center gap-3">
+        <div className="my-5 flex items-center gap-3 sm:my-6">
           <div className="h-px flex-1 bg-gray-200" />
 
-          <span className="text-sm text-gray-400">OR</span>
+          <span className="shrink-0 text-sm text-gray-400">OR</span>
 
           <div className="h-px flex-1 bg-gray-200" />
         </div>
 
-        {/* Google login */}
-
+        {/* Google Login */}
         <button
           type="button"
           onClick={handleGoogleLogin}
           disabled={googleLoading}
-          className="flex w-full items-center justify-center gap-3 rounded-md border border-gray-300 bg-white p-3 font-medium text-gray-700 transition hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-70"
+          className="flex w-full items-center justify-center gap-2 rounded-md border border-gray-300 bg-white px-3 py-3 text-sm font-medium text-gray-700 transition hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-70 sm:gap-3 sm:text-base"
         >
-          <svg width="20" height="20" viewBox="0 0 24 24">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            className="shrink-0"
+            aria-hidden="true"
+          >
             <path
               fill="#4285F4"
               d="M21.35 12.27c0-.79-.07-1.55-.2-2.27H12v4.3h5.23a4.47 4.47 0 0 1-1.94 2.93v2.78h3.14c1.84-1.69 2.92-4.18 2.92-7.74Z"
@@ -316,14 +293,15 @@ function Login() {
             />
           </svg>
 
-          {googleLoading
-            ? "Completing Google login..."
-            : "Continue with Google"}
+          <span className="min-w-0 text-center">
+            {googleLoading
+              ? "Completing Google login..."
+              : "Continue with Google"}
+          </span>
         </button>
 
         {/* Signup */}
-
-        <p className="mt-6 text-center text-sm">
+        <p className="mt-5 text-center text-sm leading-6 text-gray-600 sm:mt-6">
           Don't have an account?{" "}
           <Link
             to="/signup"
