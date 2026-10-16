@@ -28,75 +28,100 @@ function TripDetails() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50">
-        <p className="text-gray-600 text-lg">Loading trip details...</p>
+      <div className="min-h-screen flex items-center justify-center bg-slate-50 px-4">
+        <p className="text-center text-base sm:text-lg text-gray-600">
+          Loading trip details...
+        </p>
       </div>
     );
   }
 
   if (!trip) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-slate-50">
-        <p className="text-gray-600 text-lg">Trip not found.</p>
+      <div className="min-h-screen flex items-center justify-center bg-slate-50 px-4">
+        <p className="text-center text-base sm:text-lg text-gray-600">
+          Trip not found.
+        </p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-sky-50 px-6 py-10">
-      <div className="max-w-5xl mx-auto">
+    <div className="min-h-screen w-full overflow-x-hidden bg-gradient-to-br from-emerald-50 via-white to-sky-50 px-3 py-5 sm:px-6 sm:py-8 lg:py-10">
+      <div className="mx-auto w-full max-w-5xl">
+        {/* Back Button */}
         <button
+          type="button"
           onClick={() => navigate("/dashboard")}
-          className="mb-6 text-blue-600 font-semibold hover:underline"
+          className="mb-4 inline-flex items-center gap-2 rounded-md py-2 text-sm font-semibold text-blue-600 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 sm:mb-6 sm:text-base"
         >
-          ← Back to Dashboard
+          <span aria-hidden="true">←</span>
+          <span>Back to Dashboard</span>
         </button>
 
-        <div className="bg-white rounded-3xl shadow-xl border p-8 mb-8">
-          <p className="text-sm font-bold tracking-widest text-emerald-600 uppercase">
+        {/* Trip Summary */}
+        <div className="mb-5 rounded-2xl border border-slate-100 bg-white p-4 shadow-lg sm:mb-8 sm:rounded-3xl sm:p-6 sm:shadow-xl lg:p-8">
+          <p className="text-xs font-bold uppercase tracking-widest text-emerald-600 sm:text-sm">
             Saved Trip Details
           </p>
 
-          <h1 className="text-4xl font-extrabold text-gray-900 mt-2">
+          <h1 className="mt-2 break-words text-2xl font-extrabold leading-tight text-gray-900 sm:text-3xl lg:text-4xl">
             {trip.destination} Trip
           </h1>
 
-          <p className="text-gray-500 mt-2">
-            {trip.startDate} → {trip.endDate}
+          <p className="mt-3 break-words text-sm text-gray-500 sm:text-base">
+            {trip.startDate} <span className="mx-1">→</span> {trip.endDate}
           </p>
 
-          <div className="grid md:grid-cols-3 gap-5 mt-8">
-            <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-5">
-              <p className="text-sm text-gray-500">Budget</p>
-              <p className="text-2xl font-bold text-emerald-700">
+          {/* Trip Information Cards */}
+          <div className="mt-6 grid grid-cols-1 gap-3 sm:mt-8 sm:grid-cols-2 sm:gap-4 md:grid-cols-3 lg:gap-5">
+            {/* Budget */}
+            <div className="min-w-0 rounded-xl border border-emerald-100 bg-emerald-50 p-4 sm:rounded-2xl sm:p-5">
+              <p className="text-xs text-gray-500 sm:text-sm">
+                Budget
+              </p>
+
+              <p className="mt-1 break-words text-xl font-bold text-emerald-700 sm:text-2xl">
                 ₹{trip.budget}
               </p>
             </div>
 
-            <div className="bg-sky-50 border border-sky-100 rounded-2xl p-5">
-              <p className="text-sm text-gray-500">Travelers</p>
-              <p className="text-2xl font-bold text-sky-700">
+            {/* Travelers */}
+            <div className="min-w-0 rounded-xl border border-sky-100 bg-sky-50 p-4 sm:rounded-2xl sm:p-5">
+              <p className="text-xs text-gray-500 sm:text-sm">
+                Travelers
+              </p>
+
+              <p className="mt-1 break-words text-xl font-bold text-sky-700 sm:text-2xl">
                 {trip.travelers}
               </p>
             </div>
 
-            <div className="bg-indigo-50 border border-indigo-100 rounded-2xl p-5">
-              <p className="text-sm text-gray-500">Trip Type</p>
-              <p className="text-2xl font-bold text-indigo-700">
+            {/* Trip Type */}
+            <div className="min-w-0 rounded-xl border border-indigo-100 bg-indigo-50 p-4 sm:rounded-2xl sm:p-5">
+              <p className="text-xs text-gray-500 sm:text-sm">
+                Trip Type
+              </p>
+
+              <p className="mt-1 break-words text-xl font-bold text-indigo-700 sm:text-2xl">
                 {trip.tripType}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="bg-slate-950 text-white rounded-3xl shadow-2xl border border-white/10 p-8">
-          <p className="text-sm text-emerald-300 mb-2">
+        {/* AI Itinerary */}
+        <div className="min-w-0 rounded-2xl border border-white/10 bg-slate-950 p-4 text-white shadow-xl sm:rounded-3xl sm:p-6 sm:shadow-2xl lg:p-8">
+          <p className="mb-2 text-xs text-emerald-300 sm:text-sm">
             Powered by TripPilot AI Planning Engine
           </p>
 
-          <h2 className="text-3xl font-bold mb-6">✨ Full AI Itinerary</h2>
+          <h2 className="mb-4 text-xl font-bold leading-snug sm:mb-6 sm:text-2xl lg:text-3xl">
+            <span aria-hidden="true">✨ </span>
+            Full AI Itinerary
+          </h2>
 
-          <pre className="whitespace-pre-wrap text-gray-100 leading-relaxed bg-white/10 border border-white/10 rounded-2xl p-6">
+          <pre className="w-full min-w-0 max-w-full overflow-x-auto whitespace-pre-wrap break-words [overflow-wrap:anywhere] rounded-xl border border-white/10 bg-white/10 p-3 text-sm leading-relaxed text-gray-100 sm:rounded-2xl sm:p-5 sm:text-base lg:p-6">
             {trip.generatedPlan}
           </pre>
         </div>
