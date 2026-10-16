@@ -213,23 +213,23 @@ function Dashboard() {
   ]).size;
 
   return (
-    <div className="min-h-screen bg-[#f8fafc]">
+    <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-[#f8fafc]">
       {/* Dashboard content */}
       <main className="w-full">
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 py-7">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 py-5 sm:py-7">
           {/* Dashboard heading */}
-          <div className="mb-8">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-5">
-              <div>
-                <p className="text-sm font-semibold text-blue-600 uppercase tracking-wider">
+          <div className="mb-6 sm:mb-8">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 sm:gap-5">
+              <div className="min-w-0">
+                <p className="text-xs sm:text-sm font-semibold text-blue-600 uppercase tracking-wider">
                   TripPilot Dashboard
                 </p>
 
-                <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2">
+                <h1 className="text-2xl min-[380px]:text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2 break-words">
                   Welcome back, {username} 👋
                 </h1>
 
-                <p className="text-gray-500 mt-2">
+                <p className="text-gray-500 mt-2 text-sm sm:text-base">
                   Here's what's happening with your travels.
                 </p>
               </div>
@@ -237,7 +237,7 @@ function Dashboard() {
               <button
                 type="button"
                 onClick={() => navigate("/plan-trip")}
-                className="self-start md:self-center inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-semibold shadow-sm transition"
+                className="w-full sm:w-auto justify-center md:self-center inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-xl font-semibold shadow-sm transition"
               >
                 <Plus size={19} />
                 Plan New Trip
@@ -246,70 +246,76 @@ function Dashboard() {
           </div>
 
           {/* Statistics */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 mb-8">
+          <div className="grid grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-5 mb-6 sm:mb-8">
             {/* Total Trips */}
-            <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-500">Total Trips</p>
+            <div className="bg-white border border-gray-200 rounded-2xl p-4 sm:p-5 shadow-sm">
+              <div className="flex items-center justify-between gap-2">
+                <div className="min-w-0">
+                  <p className="text-xs sm:text-sm text-gray-500">
+                    Total Trips
+                  </p>
 
-                  <p className="text-3xl font-bold text-blue-600 mt-2">
+                  <p className="text-2xl sm:text-3xl font-bold text-blue-600 mt-2">
                     {trips.length}
                   </p>
                 </div>
 
-                <div className="h-11 w-11 rounded-xl bg-blue-50 flex items-center justify-center">
+                <div className="h-10 w-10 sm:h-11 sm:w-11 shrink-0 rounded-xl bg-blue-50 flex items-center justify-center">
                   <Plane size={21} className="text-blue-600" />
                 </div>
               </div>
             </div>
 
             {/* Wishlist */}
-            <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-500">Wishlist</p>
+            <div className="bg-white border border-gray-200 rounded-2xl p-4 sm:p-5 shadow-sm">
+              <div className="flex items-center justify-between gap-2">
+                <div className="min-w-0">
+                  <p className="text-xs sm:text-sm text-gray-500">Wishlist</p>
 
-                  <p className="text-3xl font-bold text-emerald-500 mt-2">
+                  <p className="text-2xl sm:text-3xl font-bold text-emerald-500 mt-2">
                     {wishlist.length}
                   </p>
                 </div>
 
-                <div className="h-11 w-11 rounded-xl bg-emerald-50 flex items-center justify-center">
+                <div className="h-10 w-10 sm:h-11 sm:w-11 shrink-0 rounded-xl bg-emerald-50 flex items-center justify-center">
                   <Heart size={21} className="text-emerald-500" />
                 </div>
               </div>
             </div>
 
             {/* Recently Viewed */}
-            <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-500">Recently Viewed</p>
+            <div className="bg-white border border-gray-200 rounded-2xl p-4 sm:p-5 shadow-sm">
+              <div className="flex items-center justify-between gap-2">
+                <div className="min-w-0">
+                  <p className="text-xs sm:text-sm text-gray-500">
+                    Recently Viewed
+                  </p>
 
-                  <p className="text-3xl font-bold text-indigo-600 mt-2">
+                  <p className="text-2xl sm:text-3xl font-bold text-indigo-600 mt-2">
                     {recentDestinations.length}
                   </p>
                 </div>
 
-                <div className="h-11 w-11 rounded-xl bg-indigo-50 flex items-center justify-center">
+                <div className="h-10 w-10 sm:h-11 sm:w-11 shrink-0 rounded-xl bg-indigo-50 flex items-center justify-center">
                   <Clock3 size={21} className="text-indigo-600" />
                 </div>
               </div>
             </div>
 
             {/* Destinations Explored */}
-            <div className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-500">Destinations Explored</p>
+            <div className="bg-white border border-gray-200 rounded-2xl p-4 sm:p-5 shadow-sm">
+              <div className="flex items-center justify-between gap-2">
+                <div className="min-w-0">
+                  <p className="text-xs sm:text-sm text-gray-500">
+                    Destinations Explored
+                  </p>
 
-                  <p className="text-3xl font-bold text-violet-600 mt-2">
+                  <p className="text-2xl sm:text-3xl font-bold text-violet-600 mt-2">
                     {exploredCount}
                   </p>
                 </div>
 
-                <div className="h-11 w-11 rounded-xl bg-violet-50 flex items-center justify-center">
+                <div className="h-10 w-10 sm:h-11 sm:w-11 shrink-0 rounded-xl bg-violet-50 flex items-center justify-center">
                   <MapPin size={21} className="text-violet-600" />
                 </div>
               </div>
@@ -317,10 +323,10 @@ function Dashboard() {
           </div>
 
           {/* Upcoming Trip */}
-          <section className="bg-white border border-gray-200 rounded-2xl p-6 sm:p-7 shadow-sm mb-8">
-            <div className="flex items-center justify-between mb-5">
-              <div>
-                <h2 className="text-xl font-bold text-gray-900">
+          <section className="bg-white border border-gray-200 rounded-2xl p-4 sm:p-7 shadow-sm mb-6 sm:mb-8">
+            <div className="flex items-center justify-between gap-3 mb-5">
+              <div className="min-w-0">
+                <h2 className="text-lg sm:text-xl font-bold text-gray-900">
                   Upcoming Trip
                 </h2>
 
@@ -329,13 +335,13 @@ function Dashboard() {
                 </p>
               </div>
 
-              <Plane size={23} className="text-blue-600" />
+              <Plane size={23} className="text-blue-600 shrink-0" />
             </div>
 
             {tripsLoading ? (
               <p className="text-gray-500">Loading trip...</p>
             ) : !upcomingTrip ? (
-              <div className="rounded-xl bg-gray-50 p-8 text-center">
+              <div className="rounded-xl bg-gray-50 p-6 sm:p-8 text-center">
                 <p className="text-gray-600">
                   No upcoming trip in the next 5 days.
                 </p>
@@ -349,25 +355,25 @@ function Dashboard() {
                 </button>
               </div>
             ) : (
-              <div className="rounded-2xl border bg-gradient-to-br from-blue-50 to-white p-5">
-                <div className="flex flex-col sm:flex-row gap-5">
-                  <div className="h-28 w-full sm:w-28 rounded-xl bg-blue-100 flex items-center justify-center flex-shrink-0">
+              <div className="rounded-2xl border bg-gradient-to-br from-blue-50 to-white p-4 sm:p-5">
+                <div className="flex flex-col sm:flex-row gap-4 sm:gap-5">
+                  <div className="h-24 sm:h-28 w-full sm:w-28 rounded-xl bg-blue-100 flex items-center justify-center flex-shrink-0">
                     <Plane size={35} className="text-blue-600" />
                   </div>
 
-                  <div className="flex-1">
+                  <div className="flex-1 min-w-0">
                     <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <h3 className="text-xl font-bold text-gray-900">
+                      <div className="min-w-0">
+                        <h3 className="text-lg sm:text-xl font-bold text-gray-900 break-words">
                           {upcomingTrip.destination}
                         </h3>
 
-                        <p className="text-sm text-gray-500 mt-1">
+                        <p className="text-sm text-gray-500 mt-1 break-words">
                           {upcomingTrip.startDate} → {upcomingTrip.endDate}
                         </p>
                       </div>
 
-                      <span className="text-xs bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full font-semibold">
+                      <span className="text-xs bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full font-semibold shrink-0">
                         Upcoming
                       </span>
                     </div>
@@ -399,10 +405,10 @@ function Dashboard() {
           </section>
 
           {/* Saved Trips */}
-          <section className="bg-white border border-gray-200 rounded-2xl p-6 sm:p-7 shadow-sm mb-8">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
-              <div>
-                <h2 className="text-2xl font-bold text-gray-900">
+          <section className="bg-white border border-gray-200 rounded-2xl p-4 sm:p-7 shadow-sm mb-6 sm:mb-8">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-5 sm:mb-6">
+              <div className="min-w-0">
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
                   Your Saved Trips
                 </h2>
 
@@ -414,7 +420,7 @@ function Dashboard() {
               <button
                 type="button"
                 onClick={() => navigate("/plan-trip")}
-                className="text-blue-600 font-semibold text-sm inline-flex items-center gap-1"
+                className="text-blue-600 font-semibold text-sm inline-flex items-center gap-1 self-start sm:self-auto"
               >
                 View All
                 <ArrowRight size={15} />
@@ -424,7 +430,7 @@ function Dashboard() {
             {tripsLoading ? (
               <p className="text-gray-500">Loading trips...</p>
             ) : trips.length === 0 ? (
-              <div className="rounded-xl bg-gray-50 text-center py-12">
+              <div className="rounded-xl bg-gray-50 text-center py-10 sm:py-12 px-4">
                 <Plane size={35} className="mx-auto text-gray-400" />
 
                 <p className="font-semibold text-gray-700 mt-3">
@@ -440,57 +446,57 @@ function Dashboard() {
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
                 {/* Show all saved trips */}
                 {trips.map((trip) => (
                   <div
                     key={trip._id}
                     onClick={() => navigate(`/dashboard/trip/${trip._id}`)}
-                    className="group border rounded-2xl p-5 hover:shadow-md hover:border-blue-200 transition cursor-pointer"
+                    className="group border rounded-2xl p-4 sm:p-5 hover:shadow-md hover:border-blue-200 transition cursor-pointer min-w-0"
                   >
                     <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <h3 className="text-lg font-bold text-gray-900">
+                      <div className="min-w-0">
+                        <h3 className="text-lg font-bold text-gray-900 break-words">
                           {trip.destination}
                         </h3>
 
-                        <p className="text-sm text-gray-500 mt-1">
+                        <p className="text-sm text-gray-500 mt-1 break-words">
                           {trip.startDate} → {trip.endDate}
                         </p>
                       </div>
 
-                      <span className="text-xs bg-blue-50 text-blue-600 px-3 py-1 rounded-full font-semibold">
+                      <span className="text-xs bg-blue-50 text-blue-600 px-3 py-1 rounded-full font-semibold shrink-0">
                         Saved
                       </span>
                     </div>
 
-                    <div className="grid grid-cols-3 gap-3 mt-5">
-                      <div className="bg-gray-50 rounded-xl p-3">
+                    <div className="grid grid-cols-3 gap-2 sm:gap-3 mt-5">
+                      <div className="bg-gray-50 rounded-xl p-2.5 sm:p-3 min-w-0">
                         <p className="text-xs text-gray-400">Budget</p>
 
-                        <p className="font-bold text-gray-800 mt-1">
+                        <p className="font-bold text-gray-800 mt-1 text-sm sm:text-base truncate">
                           ₹{trip.budget}
                         </p>
                       </div>
 
-                      <div className="bg-gray-50 rounded-xl p-3">
+                      <div className="bg-gray-50 rounded-xl p-2.5 sm:p-3 min-w-0">
                         <p className="text-xs text-gray-400">Travelers</p>
 
-                        <p className="font-bold text-gray-800 mt-1">
+                        <p className="font-bold text-gray-800 mt-1 text-sm sm:text-base">
                           {trip.travelers}
                         </p>
                       </div>
 
-                      <div className="bg-gray-50 rounded-xl p-3">
+                      <div className="bg-gray-50 rounded-xl p-2.5 sm:p-3 min-w-0">
                         <p className="text-xs text-gray-400">Type</p>
 
-                        <p className="font-bold text-gray-800 mt-1 truncate">
+                        <p className="font-bold text-gray-800 mt-1 text-sm sm:text-base truncate">
                           {trip.tripType}
                         </p>
                       </div>
                     </div>
 
-                    <div className="flex items-center justify-between mt-5">
+                    <div className="flex items-center justify-between gap-3 mt-5">
                       <span className="text-sm text-blue-600 font-semibold inline-flex items-center gap-1 group-hover:gap-2 transition-all">
                         View full itinerary
                         <ArrowRight size={15} />
@@ -499,7 +505,7 @@ function Dashboard() {
                       <button
                         type="button"
                         onClick={(event) => handleDeleteTrip(event, trip._id)}
-                        className="h-9 w-9 rounded-lg bg-red-50 text-red-500 flex items-center justify-center hover:bg-red-100 transition"
+                        className="h-9 w-9 shrink-0 rounded-lg bg-red-50 text-red-500 flex items-center justify-center hover:bg-red-100 transition"
                         title="Remove trip"
                       >
                         <Trash2 size={16} />
@@ -512,10 +518,10 @@ function Dashboard() {
           </section>
 
           {/* Wishlist */}
-          <section className="bg-white border border-gray-200 rounded-2xl p-6 sm:p-7 shadow-sm mb-8">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
-              <div>
-                <h2 className="text-2xl font-bold text-gray-900">
+          <section className="bg-white border border-gray-200 rounded-2xl p-4 sm:p-7 shadow-sm mb-6 sm:mb-8">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-5 sm:mb-6">
+              <div className="min-w-0">
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
                   My Wishlist
                 </h2>
 
@@ -527,7 +533,7 @@ function Dashboard() {
               <button
                 type="button"
                 onClick={() => navigate("/destinations")}
-                className="text-blue-600 font-semibold text-sm inline-flex items-center gap-1"
+                className="text-blue-600 font-semibold text-sm inline-flex items-center gap-1 self-start sm:self-auto"
               >
                 View All
                 <ArrowRight size={15} />
@@ -537,7 +543,7 @@ function Dashboard() {
             {wishlistLoading ? (
               <p className="text-gray-500">Loading saved destinations...</p>
             ) : wishlist.length === 0 ? (
-              <div className="rounded-xl bg-gray-50 text-center py-12">
+              <div className="rounded-xl bg-gray-50 text-center py-10 sm:py-12 px-4">
                 <Heart size={35} className="mx-auto text-gray-400" />
 
                 <p className="font-semibold text-gray-700 mt-3">
@@ -553,7 +559,7 @@ function Dashboard() {
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
                 {/* Show all wishlist destinations */}
                 {wishlist.map((wishlistItem) => {
                   const destination = wishlistItem?.destinationId;
@@ -565,7 +571,7 @@ function Dashboard() {
                   return (
                     <div
                       key={wishlistItem._id}
-                      className="group border rounded-2xl overflow-hidden bg-white hover:shadow-md transition"
+                      className="group border rounded-2xl overflow-hidden bg-white hover:shadow-md transition min-w-0"
                     >
                       <div
                         className="cursor-pointer"
@@ -573,14 +579,14 @@ function Dashboard() {
                           navigate(`/destinations/${destination._id}`)
                         }
                       >
-                        <div className="relative">
+                        <div className="relative overflow-hidden">
                           <img
                             src={
                               destination.image ||
                               "https://images.unsplash.com/photo-1501785888041-af3ef285b470"
                             }
                             alt={destination.name}
-                            className="w-full h-44 object-cover group-hover:scale-105 transition duration-500"
+                            className="w-full h-40 sm:h-44 object-cover group-hover:scale-105 transition duration-500"
                           />
 
                           <span className="absolute top-3 right-3 bg-white/95 rounded-full px-3 py-1 text-xs font-semibold text-red-500">
@@ -590,8 +596,8 @@ function Dashboard() {
 
                         <div className="p-4">
                           <div className="flex items-start justify-between gap-2">
-                            <div>
-                              <h3 className="font-bold text-gray-900 text-lg">
+                            <div className="min-w-0">
+                              <h3 className="font-bold text-gray-900 text-lg break-words">
                                 {destination.name}
                               </h3>
 
@@ -600,12 +606,12 @@ function Dashboard() {
                               </p>
                             </div>
 
-                            <span className="text-xs font-semibold text-amber-600">
+                            <span className="text-xs font-semibold text-amber-600 shrink-0">
                               ⭐ {destination.rating || 0}
                             </span>
                           </div>
 
-                          <p className="text-sm text-gray-500 mt-3">
+                          <p className="text-sm text-gray-500 mt-3 break-words">
                             {destination.location || "Location not available"}
                           </p>
                         </div>
@@ -644,10 +650,10 @@ function Dashboard() {
           </section>
 
           {/* Recently Viewed */}
-          <section className="bg-white border border-gray-200 rounded-2xl p-6 sm:p-7 shadow-sm mb-8">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
-              <div>
-                <h2 className="text-2xl font-bold text-gray-900">
+          <section className="bg-white border border-gray-200 rounded-2xl p-4 sm:p-7 shadow-sm mb-6 sm:mb-8">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-5 sm:mb-6">
+              <div className="min-w-0">
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
                   Recently Viewed Destinations
                 </h2>
 
@@ -659,7 +665,7 @@ function Dashboard() {
               <button
                 type="button"
                 onClick={() => navigate("/destinations")}
-                className="text-blue-600 font-semibold text-sm inline-flex items-center gap-1"
+                className="text-blue-600 font-semibold text-sm inline-flex items-center gap-1 self-start sm:self-auto"
               >
                 Explore More
                 <ArrowRight size={15} />
@@ -671,7 +677,7 @@ function Dashboard() {
                 Loading recently viewed destinations...
               </p>
             ) : recentDestinations.length === 0 ? (
-              <div className="rounded-xl bg-gray-50 text-center py-12">
+              <div className="rounded-xl bg-gray-50 text-center py-10 sm:py-12 px-4">
                 <Clock3 size={35} className="mx-auto text-gray-400" />
 
                 <p className="font-semibold text-gray-700 mt-3">
@@ -687,7 +693,7 @@ function Dashboard() {
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
                 {/* Show latest 6 recently viewed destinations */}
                 {recentDestinations.slice(0, 6).map((recentItem) => {
                   const destination = recentItem?.destinationId;
@@ -702,16 +708,16 @@ function Dashboard() {
                       onClick={() =>
                         navigate(`/destinations/${destination._id}`)
                       }
-                      className="group border rounded-2xl overflow-hidden bg-white hover:shadow-md hover:border-blue-200 transition cursor-pointer"
+                      className="group border rounded-2xl overflow-hidden bg-white hover:shadow-md hover:border-blue-200 transition cursor-pointer min-w-0"
                     >
-                      <div className="relative">
+                      <div className="relative overflow-hidden">
                         <img
                           src={
                             destination.image ||
                             "https://images.unsplash.com/photo-1501785888041-af3ef285b470"
                           }
                           alt={destination.name}
-                          className="w-full h-44 object-cover group-hover:scale-105 transition duration-500"
+                          className="w-full h-40 sm:h-44 object-cover group-hover:scale-105 transition duration-500"
                         />
 
                         <span className="absolute top-3 right-3 bg-slate-900/80 text-white rounded-full px-3 py-1 text-xs font-semibold">
@@ -721,8 +727,8 @@ function Dashboard() {
 
                       <div className="p-4">
                         <div className="flex items-start justify-between gap-2">
-                          <div>
-                            <h3 className="font-bold text-gray-900 text-lg">
+                          <div className="min-w-0">
+                            <h3 className="font-bold text-gray-900 text-lg break-words">
                               {destination.name}
                             </h3>
 
@@ -731,12 +737,12 @@ function Dashboard() {
                             </p>
                           </div>
 
-                          <span className="text-xs font-semibold text-amber-600">
+                          <span className="text-xs font-semibold text-amber-600 shrink-0">
                             ⭐ {destination.rating || 0}
                           </span>
                         </div>
 
-                        <p className="text-sm text-gray-500 mt-3">
+                        <p className="text-sm text-gray-500 mt-3 break-words">
                           {destination.location || "Location not available"}
                         </p>
 
