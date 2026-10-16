@@ -38,7 +38,13 @@ const SOCIAL_LINKS = [
       >
         <rect x="3" y="3" width="18" height="18" rx="5" />
         <circle cx="12" cy="12" r="4" />
-        <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+        <circle
+          cx="17.5"
+          cy="6.5"
+          r="1"
+          fill="currentColor"
+          stroke="none"
+        />
       </svg>
     ),
   },
@@ -73,15 +79,23 @@ function MountainIcon({ className = "" }) {
       aria-hidden="true"
     >
       <defs>
-        <linearGradient id="footerMountainGradient" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient
+          id="footerMountainGradient"
+          x1="0"
+          y1="0"
+          x2="0"
+          y2="1"
+        >
           <stop offset="0%" stopColor="#60A5FA" />
           <stop offset="100%" stopColor="#1D4ED8" />
         </linearGradient>
       </defs>
+
       <path
         d="M0 28 L14 8 L22 18 L30 4 L48 28 Z"
         fill="url(#footerMountainGradient)"
       />
+
       <path d="M24 28 L34 14 L48 28 Z" fill="#2563EB" opacity="0.7" />
     </svg>
   );
@@ -91,8 +105,9 @@ function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative isolate overflow-hidden bg-gradient-to-br from-[#10131d] via-[#211719] to-[#38211f] text-white">
+    <footer className="relative isolate w-full overflow-hidden bg-gradient-to-br from-[#10131d] via-[#211719] to-[#38211f] text-white">
       {/* Decorative background waves */}
+
       <div
         className="pointer-events-none absolute inset-0 -z-10"
         aria-hidden="true"
@@ -108,11 +123,13 @@ function Footer() {
             fill="#080d18"
             opacity="0.38"
           />
+
           <path
             d="M0 300 C230 220 350 390 590 340 S990 250 1190 320 S1370 360 1440 325 V600 H0 Z"
             fill="#7c3f32"
             opacity="0.12"
           />
+
           <path
             d="M0 420 C200 350 380 480 600 435 S1010 365 1210 425 S1380 460 1440 435 V600 H0 Z"
             fill="#0b1020"
@@ -122,35 +139,40 @@ function Footer() {
       </div>
 
       {/* Main footer content */}
-      <div className="mx-auto max-w-7xl px-6 pb-10 pt-12 md:px-10 lg:px-14">
-        <div className="grid grid-cols-1 gap-9 sm:grid-cols-2 lg:grid-cols-[1.5fr_0.9fr_0.9fr_1fr] lg:gap-8">
+
+      <div className="mx-auto w-full max-w-7xl px-4 pb-8 pt-9 sm:px-6 sm:pb-10 sm:pt-12 md:px-10 lg:px-14">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-10 lg:grid-cols-[1.5fr_0.9fr_0.9fr_1fr] lg:gap-8">
           {/* Brand */}
-          <div className="lg:pr-8">
+
+          <div className="min-w-0 lg:pr-8">
             <Link
               to="/"
-              className="inline-block w-fit"
+              className="inline-block w-fit max-w-full"
               aria-label="TripPilot AI Home"
             >
-              <span className="text-3xl font-extrabold tracking-tight">
+              <span className="text-2xl font-extrabold tracking-tight sm:text-3xl">
                 TripPilot <span className="text-blue-500">AI</span>
               </span>
             </Link>
-            <p className="mt-4 max-w-sm text-base leading-7 text-gray-300">
+
+            <p className="mt-3 max-w-sm text-sm leading-6 text-gray-300 sm:mt-4 sm:text-base sm:leading-7">
               Explore India, discover destinations and plan your trips with AI.
             </p>
           </div>
 
           {/* Explore */}
-          <div>
-            <h3 className="text-sm font-bold uppercase tracking-[0.18em]">
+
+          <div className="min-w-0">
+            <h3 className="text-xs font-bold uppercase tracking-[0.18em] sm:text-sm">
               Explore
             </h3>
-            <ul className="mt-5 space-y-3">
+
+            <ul className="mt-4 space-y-3 sm:mt-5">
               {EXPLORE_LINKS.map((link) => (
                 <li key={link.label}>
                   <Link
                     to={link.to}
-                    className="text-sm text-gray-300 transition-colors hover:text-blue-400 md:text-base"
+                    className="inline-block text-sm text-gray-300 transition-colors hover:text-blue-400 sm:text-base"
                   >
                     {link.label}
                   </Link>
@@ -160,16 +182,18 @@ function Footer() {
           </div>
 
           {/* Quick Links */}
-          <div>
-            <h3 className="text-sm font-bold uppercase tracking-[0.18em]">
+
+          <div className="min-w-0">
+            <h3 className="text-xs font-bold uppercase tracking-[0.18em] sm:text-sm">
               Quick Links
             </h3>
-            <ul className="mt-5 space-y-3">
+
+            <ul className="mt-4 space-y-3 sm:mt-5">
               {QUICK_LINKS.map((link) => (
                 <li key={link.label}>
                   <Link
                     to={link.to}
-                    className="text-sm text-gray-300 transition-colors hover:text-blue-400 md:text-base"
+                    className="inline-block text-sm text-gray-300 transition-colors hover:text-blue-400 sm:text-base"
                   >
                     {link.label}
                   </Link>
@@ -179,43 +203,54 @@ function Footer() {
           </div>
 
           {/* Contact Us */}
-          <div>
-            <h3 className="text-sm font-bold uppercase tracking-[0.18em]">
+
+          <div className="min-w-0 sm:col-span-2 lg:col-span-1">
+            <h3 className="text-xs font-bold uppercase tracking-[0.18em] sm:text-sm">
               Contact Us
             </h3>
 
-            <div className="mt-5 space-y-4">
+            <div className="mt-4 space-y-4 sm:mt-5">
               {/* Phone */}
+
               <a
                 href="tel:+919389697337"
-                className="flex items-center gap-3 text-sm text-gray-300 transition-colors hover:text-white md:text-base"
+                className="flex min-w-0 items-center gap-3 text-sm text-gray-300 transition-colors hover:text-white sm:text-base"
               >
                 <Phone size={18} className="shrink-0 text-blue-400" />
+
                 <span>+91 9389697337</span>
               </a>
 
               {/* Email */}
+
               <a
                 href="mailto:singhsundar9167@gmail.com"
-                className="flex items-start gap-3 text-sm text-gray-300 transition-colors hover:text-white md:text-base"
+                className="flex min-w-0 items-start gap-3 text-sm text-gray-300 transition-colors hover:text-white sm:text-base"
               >
                 <Mail size={18} className="mt-0.5 shrink-0 text-blue-400" />
-                <span className="break-all">singhsundar9167@gmail.com</span>
+
+                <span className="min-w-0 break-all">
+                  singhsundar9167@gmail.com
+                </span>
               </a>
 
               {/* Location */}
-              <div className="flex items-center gap-3 text-sm text-gray-300 md:text-base">
+
+              <div className="flex items-center gap-3 text-sm text-gray-300 sm:text-base">
                 <MapPin size={18} className="shrink-0 text-blue-400" />
+
                 <span>India</span>
               </div>
             </div>
 
             {/* Social links */}
-            <div className="mt-7">
-              <h3 className="text-sm font-bold uppercase tracking-[0.18em]">
+
+            <div className="mt-6 sm:mt-7">
+              <h3 className="text-xs font-bold uppercase tracking-[0.18em] sm:text-sm">
                 Follow Us
               </h3>
-              <div className="mt-4 flex items-center gap-3">
+
+              <div className="mt-4 flex flex-wrap items-center gap-3">
                 {SOCIAL_LINKS.map((social) => (
                   <a
                     key={social.name}
@@ -224,7 +259,7 @@ function Footer() {
                     rel="noopener noreferrer"
                     aria-label={social.name}
                     title={social.name}
-                    className={`flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/10 p-2 text-white transition-all duration-200 hover:-translate-y-1 ${social.hover}`}
+                    className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/10 p-2 text-white transition-all duration-200 hover:-translate-y-1 ${social.hover}`}
                   >
                     {social.icon}
                   </a>
@@ -236,14 +271,18 @@ function Footer() {
       </div>
 
       {/* Copyright bar */}
-      <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-14">
+
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-10 lg:px-14">
         <div className="border-t border-white/15" />
-        <div className="flex flex-col items-center justify-between gap-4 py-6 text-sm text-gray-400 sm:flex-row">
-          <p className="text-center sm:text-left">
+
+        <div className="flex flex-col items-center justify-between gap-4 py-5 text-xs text-gray-400 sm:flex-row sm:py-6 sm:text-sm">
+          <p className="text-center leading-6 sm:text-left">
             © {year} TripPilot AI. All rights reserved.
           </p>
+
           <div className="flex items-center gap-3 text-gray-300">
             <MountainIcon className="h-6 w-11 shrink-0" />
+
             <span>Made for travellers</span>
           </div>
         </div>
