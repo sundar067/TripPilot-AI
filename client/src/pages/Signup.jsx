@@ -8,7 +8,6 @@ import { registerUser } from "../services/authService";
 
 function Signup() {
   // Form data
-
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -17,27 +16,21 @@ function Signup() {
   });
 
   // Loading state
-
   const [loading, setLoading] = useState(false);
 
   // Google loading state
-
   const [googleLoading, setGoogleLoading] = useState(false);
 
   // Show / hide password
-
   const [showPassword, setShowPassword] = useState(false);
 
   // Show / hide confirm password
-
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   // Navigation
-
   const navigate = useNavigate();
 
   // Input fields update
-
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -46,7 +39,6 @@ function Signup() {
   };
 
   // Signup form submit
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -87,7 +79,6 @@ function Signup() {
       });
 
       // Clear form
-
       setFormData({
         name: "",
         email: "",
@@ -96,12 +87,14 @@ function Signup() {
       });
 
       // Redirect to login
-
       setTimeout(() => {
         navigate("/login");
       }, 1000);
     } catch (error) {
-      console.error("Signup Error:", error.response?.data || error.message);
+      console.error(
+        "Signup Error:",
+        error.response?.data || error.message
+      );
 
       toast.error(error.response?.data?.message || "Signup failed", {
         position: "top-center",
@@ -112,7 +105,6 @@ function Signup() {
   };
 
   // Start Google signup
-
   const handleGoogleSignup = () => {
     if (googleLoading) {
       return;
@@ -124,17 +116,16 @@ function Signup() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100">
-      <div className="w-full max-w-md rounded-xl bg-white p-8 shadow-md">
+    <div className="flex min-h-screen w-full items-center justify-center overflow-x-hidden bg-gray-100 px-3 py-6 sm:px-6 sm:py-8">
+      <div className="w-full max-w-md rounded-xl bg-white p-5 shadow-md sm:p-8">
         {/* Heading */}
-
-        <h2 className="mb-6 text-center text-2xl font-bold">Create Account</h2>
+        <h2 className="mb-5 text-center text-2xl font-bold text-gray-900 sm:mb-6 sm:text-2xl">
+          Create Account
+        </h2>
 
         {/* Signup Form */}
-
         <form onSubmit={handleSubmit}>
           {/* Name */}
-
           <input
             type="text"
             name="name"
@@ -142,12 +133,12 @@ function Signup() {
             value={formData.name}
             onChange={handleChange}
             disabled={loading || googleLoading}
-            className="mb-4 w-full rounded-md border px-4 py-3 outline-none focus:border-blue-500 disabled:cursor-not-allowed disabled:opacity-60"
+            autoComplete="name"
+            className="mb-4 w-full min-w-0 rounded-md border border-gray-300 px-4 py-3 text-base outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100 disabled:cursor-not-allowed disabled:opacity-60"
             required
           />
 
           {/* Email */}
-
           <input
             type="email"
             name="email"
@@ -155,12 +146,12 @@ function Signup() {
             value={formData.email}
             onChange={handleChange}
             disabled={loading || googleLoading}
-            className="mb-4 w-full rounded-md border px-4 py-3 outline-none focus:border-blue-500 disabled:cursor-not-allowed disabled:opacity-60"
+            autoComplete="email"
+            className="mb-4 w-full min-w-0 rounded-md border border-gray-300 px-4 py-3 text-base outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100 disabled:cursor-not-allowed disabled:opacity-60"
             required
           />
 
           {/* Password */}
-
           <div className="relative mb-4">
             <input
               type={showPassword ? "text" : "password"}
@@ -169,7 +160,8 @@ function Signup() {
               value={formData.password}
               onChange={handleChange}
               disabled={loading || googleLoading}
-              className="w-full rounded-md border px-4 py-3 pr-12 outline-none focus:border-blue-500 disabled:cursor-not-allowed disabled:opacity-60"
+              autoComplete="new-password"
+              className="w-full min-w-0 rounded-md border border-gray-300 px-4 py-3 pr-12 text-base outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100 disabled:cursor-not-allowed disabled:opacity-60"
               required
             />
 
@@ -177,14 +169,14 @@ function Signup() {
               type="button"
               onClick={() => setShowPassword(!showPassword)}
               disabled={loading || googleLoading}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 disabled:cursor-not-allowed"
+              aria-label={showPassword ? "Hide password" : "Show password"}
+              className="absolute right-3 top-1/2 -translate-y-1/2 rounded p-1 text-gray-500 transition hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 disabled:cursor-not-allowed"
             >
               {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
           </div>
 
           {/* Confirm Password */}
-
           <div className="relative mb-4">
             <input
               type={showConfirmPassword ? "text" : "password"}
@@ -193,52 +185,66 @@ function Signup() {
               value={formData.confirmPassword}
               onChange={handleChange}
               disabled={loading || googleLoading}
-              className="w-full rounded-md border px-4 py-3 pr-12 outline-none focus:border-blue-500 disabled:cursor-not-allowed disabled:opacity-60"
+              autoComplete="new-password"
+              className="w-full min-w-0 rounded-md border border-gray-300 px-4 py-3 pr-12 text-base outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100 disabled:cursor-not-allowed disabled:opacity-60"
               required
             />
 
             <button
               type="button"
-              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              onClick={() =>
+                setShowConfirmPassword(!showConfirmPassword)
+              }
               disabled={loading || googleLoading}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 disabled:cursor-not-allowed"
+              aria-label={
+                showConfirmPassword
+                  ? "Hide confirm password"
+                  : "Show confirm password"
+              }
+              className="absolute right-3 top-1/2 -translate-y-1/2 rounded p-1 text-gray-500 transition hover:text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 disabled:cursor-not-allowed"
             >
-              {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              {showConfirmPassword ? (
+                <EyeOff size={20} />
+              ) : (
+                <Eye size={20} />
+              )}
             </button>
           </div>
 
           {/* Signup Button */}
-
           <button
             type="submit"
             disabled={loading || googleLoading}
-            className="w-full rounded-md bg-blue-600 py-3 text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+            className="w-full rounded-md bg-blue-600 px-4 py-3 text-base font-semibold text-white transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
           >
             {loading ? "Creating Account..." : "Signup"}
           </button>
         </form>
 
         {/* Divider */}
-
-        <div className="my-6 flex items-center gap-3">
+        <div className="my-5 flex items-center gap-3 sm:my-6">
           <div className="h-px flex-1 bg-gray-200" />
 
-          <span className="text-sm text-gray-400">OR</span>
+          <span className="shrink-0 text-sm text-gray-400">OR</span>
 
           <div className="h-px flex-1 bg-gray-200" />
         </div>
 
         {/* Google Signup */}
-
         <button
           type="button"
           onClick={handleGoogleSignup}
           disabled={loading || googleLoading}
-          className="flex w-full items-center justify-center gap-3 rounded-md border border-gray-300 bg-white p-3 font-medium text-gray-700 transition hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-70"
+          className="flex w-full items-center justify-center gap-2 rounded-md border border-gray-300 bg-white px-3 py-3 text-sm font-medium text-gray-700 transition hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-70 sm:gap-3 sm:text-base"
         >
           {/* Google Icon */}
-
-          <svg width="20" height="20" viewBox="0 0 24 24">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            className="shrink-0"
+            aria-hidden="true"
+          >
             <path
               fill="#4285F4"
               d="M21.35 12.27c0-.79-.07-1.55-.2-2.27H12v4.3h5.23a4.47 4.47 0 0 1-1.94 2.93v2.78h3.14c1.84-1.69 2.92-4.18 2.92-7.74Z"
@@ -260,14 +266,20 @@ function Signup() {
             />
           </svg>
 
-          {googleLoading ? "Redirecting to Google..." : "Continue with Google"}
+          <span className="min-w-0 text-center">
+            {googleLoading
+              ? "Redirecting to Google..."
+              : "Continue with Google"}
+          </span>
         </button>
 
         {/* Login Link */}
-
-        <p className="mt-6 text-center">
+        <p className="mt-5 text-center text-sm leading-6 text-gray-600 sm:mt-6 sm:text-base">
           Already have an account?{" "}
-          <Link to="/login" className="text-blue-600 hover:underline">
+          <Link
+            to="/login"
+            className="font-medium text-blue-600 hover:underline"
+          >
             Login
           </Link>
         </p>
