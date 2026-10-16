@@ -36,76 +36,90 @@ function AttractionDetails() {
 
   if (!attraction) {
     return (
-      <div className="text-center py-20 text-2xl font-bold">
+      <div className="flex min-h-[60vh] items-center justify-center px-4 py-16 text-center text-xl font-bold sm:text-2xl">
         Attraction Not Found
       </div>
     );
   }
 
   return (
-    <div className="bg-gray-100 min-h-screen pb-16">
+    <div className="min-h-screen w-full overflow-x-hidden bg-gray-100 pb-10 sm:pb-16">
       {/* Hero Section */}
-
-      <div className="max-w-5xl mx-auto px-6 pt-8">
-        <div className="overflow-hidden rounded-2xl shadow-xl">
+      <div className="mx-auto max-w-5xl px-3 pt-5 sm:px-6 sm:pt-8">
+        <div className="overflow-hidden rounded-xl shadow-xl sm:rounded-2xl">
           <img
             src={attraction.image}
             alt={attraction.name}
-            className="w-full h-64 md:h-80 object-cover"
+            className="h-52 w-full object-cover sm:h-64 md:h-80"
           />
         </div>
       </div>
 
       {/* Content */}
-
-      <div className="max-w-5xl mx-auto px-6 mt-8">
-        <h1 className="text-2xl md:text-3xl font-bold text-gray-900">
+      <div className="mx-auto mt-5 max-w-5xl px-3 sm:mt-8 sm:px-6">
+        <h1 className="break-words text-2xl font-bold text-gray-900 sm:text-3xl">
           {attraction.name}
         </h1>
 
-        <div className="flex items-center gap-2 mt-2">
+        <div className="mt-2 flex flex-wrap items-center gap-2">
           <span className="text-lg">⭐</span>
 
-          <span className="text-lg font-semibold text-yellow-500">
+          <span className="text-base font-semibold text-yellow-500 sm:text-lg">
             {attraction.rating}
           </span>
         </div>
 
         {/* Description */}
+        <div className="mt-5 rounded-xl bg-white p-4 shadow sm:mt-6 sm:p-6">
+          <h2 className="mb-3 text-lg font-bold sm:text-xl">
+            Description
+          </h2>
 
-        <div className="mt-6 bg-white rounded-xl shadow p-6">
-          <h2 className="text-lg font-bold mb-3">Description</h2>
-
-          <p className="text-gray-700 leading-7">{attraction.description}</p>
+          <p className="break-words text-sm leading-7 text-gray-700 sm:text-base">
+            {attraction.description}
+          </p>
         </div>
 
         {/* Information */}
+        <div className="mt-5 grid grid-cols-1 gap-4 sm:mt-6 sm:grid-cols-2 sm:gap-5">
+          <div className="min-w-0 rounded-xl bg-white p-4 shadow sm:p-5">
+            <h3 className="mb-2 text-base font-bold">
+              💰 Price
+            </h3>
 
-        <div className="grid md:grid-cols-2 gap-5 mt-6">
-          <div className="bg-white rounded-xl shadow p-5">
-            <h3 className="text-base font-bold mb-2">💰 Price</h3>
-
-            <p className="text-gray-700">{attraction.price}</p>
+            <p className="break-words text-sm leading-6 text-gray-700 sm:text-base">
+              {attraction.price}
+            </p>
           </div>
 
-          <div className="bg-white rounded-xl shadow p-5">
-            <h3 className="text-base font-bold mb-2">🕒 Timing</h3>
+          <div className="min-w-0 rounded-xl bg-white p-4 shadow sm:p-5">
+            <h3 className="mb-2 text-base font-bold">
+              🕒 Timing
+            </h3>
 
-            <p className="text-gray-700">{attraction.timing}</p>
+            <p className="break-words text-sm leading-6 text-gray-700 sm:text-base">
+              {attraction.timing}
+            </p>
           </div>
 
-          <div className="bg-white rounded-xl shadow p-5">
-            <h3 className="text-base font-bold mb-2">📍 Destination</h3>
+          <div className="min-w-0 rounded-xl bg-white p-4 shadow sm:p-5">
+            <h3 className="mb-2 text-base font-bold">
+              📍 Destination
+            </h3>
 
-            <p className="text-gray-700">
+            <p className="break-words text-sm leading-6 text-gray-700 sm:text-base">
               {attraction.destinationId?.name || "Unknown"}
             </p>
           </div>
 
-          <div className="bg-white rounded-xl shadow p-5">
-            <h3 className="text-base font-bold mb-2">⭐ Rating</h3>
+          <div className="min-w-0 rounded-xl bg-white p-4 shadow sm:p-5">
+            <h3 className="mb-2 text-base font-bold">
+              ⭐ Rating
+            </h3>
 
-            <p className="text-gray-700 font-semibold">{attraction.rating}</p>
+            <p className="break-words text-sm font-semibold leading-6 text-gray-700 sm:text-base">
+              {attraction.rating}
+            </p>
           </div>
         </div>
       </div>
