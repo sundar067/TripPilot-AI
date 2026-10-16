@@ -116,31 +116,31 @@ function Wishlist() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 px-5 py-8 sm:px-8">
+    <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-gray-50 px-4 py-6 sm:px-8 sm:py-8">
       <div className="mx-auto max-w-7xl">
         {/* Page heading */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 sm:text-4xl">
+        <div className="mb-6 sm:mb-8">
+          <h1 className="break-words text-2xl font-bold text-gray-900 min-[380px]:text-3xl sm:text-4xl">
             My Wishlist
           </h1>
 
-          <p className="mt-2 text-gray-600">
+          <p className="mt-2 text-sm text-gray-600 sm:text-base">
             Your saved destinations in one place.
           </p>
         </div>
 
         {/* Empty wishlist */}
         {destinations.length === 0 ? (
-          <div className="rounded-2xl border border-gray-200 bg-white px-6 py-16 text-center shadow-sm">
+          <div className="rounded-2xl border border-gray-200 bg-white px-4 py-12 text-center shadow-sm sm:px-6 sm:py-16">
             <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-red-50">
               <Heart size={30} className="text-red-500" fill="currentColor" />
             </div>
 
-            <h2 className="mt-5 text-xl font-bold text-gray-900">
+            <h2 className="mt-5 text-lg font-bold text-gray-900 sm:text-xl">
               Your wishlist is empty
             </h2>
 
-            <p className="mx-auto mt-2 max-w-md text-gray-500">
+            <p className="mx-auto mt-2 max-w-md text-sm text-gray-500 sm:text-base">
               Save destinations you love and they will appear here.
             </p>
 
@@ -156,7 +156,7 @@ function Wishlist() {
         ) : (
           <>
             {/* Wishlist count */}
-            <div className="mb-5">
+            <div className="mb-4 sm:mb-5">
               <p className="text-sm font-medium text-gray-500">
                 {destinations.length}{" "}
                 {destinations.length === 1 ? "destination" : "destinations"}{" "}
@@ -165,15 +165,15 @@ function Wishlist() {
             </div>
 
             {/* Wishlist cards */}
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 xl:grid-cols-3">
               {destinations.map((destination) => (
                 <div
                   key={destination._id}
-                  className="group overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+                  className="group min-w-0 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
                 >
                   {/* Image */}
                   <div
-                    className="relative cursor-pointer"
+                    className="relative cursor-pointer overflow-hidden"
                     onClick={() => navigate(`/destinations/${destination._id}`)}
                   >
                     <img
@@ -182,7 +182,7 @@ function Wishlist() {
                         "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee"
                       }
                       alt={destination.name}
-                      className="h-52 w-full object-cover transition duration-500 group-hover:scale-105"
+                      className="h-44 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-52"
                       onError={(event) => {
                         event.currentTarget.src =
                           "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee";
@@ -197,11 +197,11 @@ function Wishlist() {
                   </div>
 
                   {/* Destination details */}
-                  <div className="p-5">
+                  <div className="p-4 sm:p-5">
                     {/* Name + Rating */}
                     <div className="flex items-start justify-between gap-3">
-                      <div>
-                        <h2 className="text-xl font-bold text-gray-900">
+                      <div className="min-w-0">
+                        <h2 className="break-words text-lg font-bold text-gray-900 sm:text-xl">
                           {destination.name}
                         </h2>
 
@@ -210,19 +210,19 @@ function Wishlist() {
                         </p>
                       </div>
 
-                      <div className="whitespace-nowrap text-sm font-semibold text-amber-600">
+                      <div className="shrink-0 whitespace-nowrap text-sm font-semibold text-amber-600">
                         ⭐ {destination.rating || 0}
                       </div>
                     </div>
 
                     {/* Location */}
-                    <p className="mt-3 text-sm text-gray-500">
+                    <p className="mt-3 break-words text-sm text-gray-500">
                       {destination.location || "Location not available"}
                     </p>
 
                     {/* Famous For */}
                     {destination.famousFor && (
-                      <p className="mt-2 text-sm text-gray-600">
+                      <p className="mt-2 break-words text-sm text-gray-600">
                         <span className="font-semibold">Famous for:</span>{" "}
                         {destination.famousFor}
                       </p>
@@ -230,14 +230,14 @@ function Wishlist() {
 
                     {/* Best Time */}
                     {destination.bestTime && (
-                      <p className="mt-1 text-sm text-gray-600">
+                      <p className="mt-1 break-words text-sm text-gray-600">
                         <span className="font-semibold">Best Time:</span>{" "}
                         {destination.bestTime}
                       </p>
                     )}
 
                     {/* Buttons */}
-                    <div className="mt-5 flex items-center justify-between border-t border-gray-100 pt-4">
+                    <div className="mt-4 flex items-center justify-between gap-3 border-t border-gray-100 pt-4 sm:mt-5">
                       <button
                         type="button"
                         onClick={() =>
