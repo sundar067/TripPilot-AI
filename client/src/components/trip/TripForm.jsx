@@ -24,9 +24,9 @@ function TripForm() {
   const [isListening, setIsListening] = useState(false);
   const recognitionRef = useRef(null);
 
-  // Same functionality, only updated styling
+  // Responsive input styling
   const inputStyle =
-    "w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100";
+    "block w-full min-w-0 rounded-xl border border-slate-200 bg-white px-3 py-3 text-base text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 sm:px-4 sm:text-sm";
 
   const handleChange = (e) => {
     setTripData({
@@ -200,20 +200,22 @@ function TripForm() {
   };
 
   return (
-    <div className="mx-auto w-full max-w-4xl px-4 pb-10">
+    <div className="mx-auto w-full max-w-4xl min-w-0 px-3 pb-8 sm:px-4 sm:pb-10">
       {/* Main Form Card */}
 
-      <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+      <div className="min-w-0 rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:rounded-2xl sm:p-6 md:p-8">
         {/* Card Heading */}
 
-        <div className="mb-7">
-          <h2 className="text-2xl font-bold text-slate-900">Trip Details</h2>
+        <div className="mb-5 sm:mb-7">
+          <h2 className="text-xl font-bold text-slate-900 sm:text-2xl">
+            Trip Details
+          </h2>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
           {/* Destination */}
 
-          <div>
+          <div className="min-w-0">
             <label className="mb-2 block text-sm font-semibold text-slate-700">
               Where do you want to go?
             </label>
@@ -228,16 +230,18 @@ function TripForm() {
             />
 
             {errors.destination && (
-              <p className="mt-2 text-sm text-red-500">{errors.destination}</p>
+              <p className="mt-2 break-words text-sm text-red-500">
+                {errors.destination}
+              </p>
             )}
           </div>
 
           {/* Dates */}
 
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid min-w-0 grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2">
             {/* Start Date */}
 
-            <div>
+            <div className="min-w-0">
               <label className="mb-2 block text-sm font-semibold text-slate-700">
                 Trip Start Date
               </label>
@@ -251,13 +255,15 @@ function TripForm() {
               />
 
               {errors.startDate && (
-                <p className="mt-2 text-sm text-red-500">{errors.startDate}</p>
+                <p className="mt-2 break-words text-sm text-red-500">
+                  {errors.startDate}
+                </p>
               )}
             </div>
 
             {/* End Date */}
 
-            <div>
+            <div className="min-w-0">
               <label className="mb-2 block text-sm font-semibold text-slate-700">
                 Trip End Date
               </label>
@@ -271,17 +277,19 @@ function TripForm() {
               />
 
               {errors.endDate && (
-                <p className="mt-2 text-sm text-red-500">{errors.endDate}</p>
+                <p className="mt-2 break-words text-sm text-red-500">
+                  {errors.endDate}
+                </p>
               )}
             </div>
           </div>
 
           {/* Budget and Travelers */}
 
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid min-w-0 grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2">
             {/* Budget */}
 
-            <div>
+            <div className="min-w-0">
               <label className="mb-2 block text-sm font-semibold text-slate-700">
                 Total Budget (INR)
               </label>
@@ -296,13 +304,15 @@ function TripForm() {
               />
 
               {errors.budget && (
-                <p className="mt-2 text-sm text-red-500">{errors.budget}</p>
+                <p className="mt-2 break-words text-sm text-red-500">
+                  {errors.budget}
+                </p>
               )}
             </div>
 
             {/* Travelers */}
 
-            <div>
+            <div className="min-w-0">
               <label className="mb-2 block text-sm font-semibold text-slate-700">
                 Number of Travelers
               </label>
@@ -317,14 +327,16 @@ function TripForm() {
               />
 
               {errors.travelers && (
-                <p className="mt-2 text-sm text-red-500">{errors.travelers}</p>
+                <p className="mt-2 break-words text-sm text-red-500">
+                  {errors.travelers}
+                </p>
               )}
             </div>
           </div>
 
           {/* Trip Type */}
 
-          <div>
+          <div className="min-w-0">
             <label className="mb-2 block text-sm font-semibold text-slate-700">
               Trip Type
             </label>
@@ -343,7 +355,9 @@ function TripForm() {
             </select>
 
             {errors.tripType && (
-              <p className="mt-2 text-sm text-red-500">{errors.tripType}</p>
+              <p className="mt-2 break-words text-sm text-red-500">
+                {errors.tripType}
+              </p>
             )}
           </div>
 
@@ -352,7 +366,7 @@ function TripForm() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 py-3.5 text-base font-semibold text-white shadow-sm transition hover:from-blue-700 hover:to-indigo-700 disabled:cursor-not-allowed disabled:opacity-60"
+            className="w-full rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-3 py-3.5 text-sm font-semibold text-white shadow-sm transition hover:from-blue-700 hover:to-indigo-700 disabled:cursor-not-allowed disabled:opacity-60 sm:text-base"
           >
             {loading
               ? "TripPilot AI is planning..."
@@ -364,42 +378,42 @@ function TripForm() {
       {/* Generated Trip */}
 
       {tripPlan && (
-        <div className="mt-10 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+        <div className="mt-6 min-w-0 rounded-xl border border-slate-200 bg-white p-4 shadow-sm sm:mt-10 sm:rounded-2xl sm:p-6 md:p-8">
           <p className="mb-2 text-sm font-medium text-blue-600">
             Powered by TripPilot AI
           </p>
 
-          <h2 className="mb-6 text-2xl font-bold text-slate-900">
+          <h2 className="mb-5 break-words text-xl font-bold text-slate-900 sm:mb-6 sm:text-2xl">
             ✨ AI Generated Itinerary
           </h2>
 
-          <pre className="whitespace-pre-wrap rounded-xl bg-slate-50 p-5 leading-relaxed text-slate-700">
+          <pre className="max-w-full overflow-x-auto whitespace-pre-wrap break-words rounded-xl bg-slate-50 p-3 text-sm leading-relaxed text-slate-700 sm:p-5 sm:text-base">
             {tripPlan}
           </pre>
 
           {/* AI Chat */}
 
-          <div className="mt-8 border-t border-slate-200 pt-6">
-            <h3 className="mb-5 text-xl font-bold text-slate-900">
+          <div className="mt-6 border-t border-slate-200 pt-5 sm:mt-8 sm:pt-6">
+            <h3 className="mb-4 break-words text-lg font-bold text-slate-900 sm:mb-5 sm:text-xl">
               Ask TripPilot AI about this plan
             </h3>
 
             {chatMessages.length > 0 && (
-              <div className="mb-6 max-h-[400px] space-y-4 overflow-y-auto pr-2">
+              <div className="mb-5 max-h-[350px] space-y-3 overflow-y-auto overflow-x-hidden pr-1 sm:mb-6 sm:max-h-[400px] sm:space-y-4 sm:pr-2">
                 {chatMessages.map((message, index) => (
                   <div
                     key={index}
-                    className={`rounded-xl p-4 ${
+                    className={`w-fit max-w-[95%] break-words rounded-xl p-3 sm:max-w-[80%] sm:p-4 ${
                       message.sender === "user"
-                        ? "ml-auto max-w-[80%] bg-blue-600 text-white"
-                        : "mr-auto max-w-[80%] border border-slate-200 bg-slate-50 text-slate-800"
+                        ? "ml-auto bg-blue-600 text-white"
+                        : "mr-auto border border-slate-200 bg-slate-50 text-slate-800"
                     }`}
                   >
                     <p className="mb-1 text-xs font-semibold opacity-70">
                       {message.sender === "user" ? "You" : "TripPilot AI"}
                     </p>
 
-                    <p className="whitespace-pre-wrap text-sm">
+                    <p className="whitespace-pre-wrap break-words text-sm">
                       {message.text}
                     </p>
                   </div>
@@ -409,7 +423,7 @@ function TripForm() {
 
             {/* Chat Input */}
 
-            <div className="flex items-center gap-3">
+            <div className="flex min-w-0 flex-wrap items-center gap-2 sm:flex-nowrap sm:gap-3">
               <textarea
                 placeholder="Ask anything about your trip..."
                 value={chatInput}
@@ -421,7 +435,7 @@ function TripForm() {
                   }
                 }}
                 rows={1}
-                className="min-h-[52px] max-h-[150px] flex-1 resize-none rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-800 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                className="min-h-[48px] min-w-0 flex-1 resize-none rounded-xl border border-slate-200 bg-white px-3 py-3 text-sm text-slate-800 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100 sm:min-h-[52px] sm:px-4 sm:text-base"
               />
 
               {/* Mic Button */}
@@ -429,7 +443,8 @@ function TripForm() {
               <button
                 type="button"
                 onClick={handleMic}
-                className={`rounded-xl p-3.5 shadow-sm transition ${
+                aria-label={isListening ? "Stop microphone" : "Start microphone"}
+                className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl shadow-sm transition sm:h-[52px] sm:w-[52px] ${
                   isListening
                     ? "animate-pulse bg-red-500 text-white"
                     : "border border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
@@ -444,7 +459,7 @@ function TripForm() {
                 type="button"
                 onClick={handleAskQuestion}
                 disabled={chatLoading}
-                className="flex min-w-[120px] items-center justify-center rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-5 py-3.5 font-semibold text-white transition hover:from-blue-700 hover:to-indigo-700 disabled:opacity-60"
+                className="flex min-h-11 w-full items-center justify-center rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-3 text-sm font-semibold text-white transition hover:from-blue-700 hover:to-indigo-700 disabled:opacity-60 sm:min-h-[52px] sm:w-auto sm:min-w-[120px] sm:px-5 sm:py-3.5 sm:text-base"
               >
                 {chatLoading ? (
                   <div className="flex items-center gap-2">
