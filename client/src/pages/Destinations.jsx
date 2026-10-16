@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 
 import { getAllDestinations } from "../services/destinationService";
@@ -66,25 +67,38 @@ function Destinations() {
   }
 
   return (
-    <div className="p-8">
-      <h1 className="text-4xl font-bold mb-2">Explore Destinations</h1>
+    <div className="w-full min-w-0 px-4 py-5 sm:px-6 sm:py-6 md:p-8">
+      <div className="mb-6 sm:mb-8">
+        <h1 className="mb-2 break-words text-2xl font-bold leading-tight text-gray-900 sm:text-3xl md:text-4xl">
+          Explore Destinations
+        </h1>
 
-      <p className="text-gray-600 mb-8">
-        Discover tourist places across India using smart filters.
-      </p>
+        <p className="max-w-3xl text-sm leading-relaxed text-gray-600 sm:text-base">
+          Discover tourist places across India using smart filters.
+        </p>
+      </div>
 
-      <FilterBar
-        filters={filters}
-        setFilters={setFilters}
-        handleClear={handleClear}
-      />
+      <div className="mb-6 min-w-0 sm:mb-8">
+        <FilterBar
+          filters={filters}
+          setFilters={setFilters}
+          handleClear={handleClear}
+        />
+      </div>
 
       {destinations.length === 0 ? (
-        <p className="text-gray-600">No destinations found.</p>
+        <div className="rounded-xl border border-gray-200 bg-white px-4 py-10 text-center sm:px-6">
+          <p className="text-sm text-gray-600 sm:text-base">
+            No destinations found.
+          </p>
+        </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid min-w-0 grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
           {destinations.map((destination) => (
-            <DestinationCard key={destination._id} destination={destination} />
+            <DestinationCard
+              key={destination._id}
+              destination={destination}
+            />
           ))}
         </div>
       )}
