@@ -586,23 +586,23 @@ ${shareUrl}`;
     const hasMoreActivityImages = allActivityImages.length > 3;
 
     return (
-      <div className="min-h-screen bg-[#f8fafc]">
+      <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-[#f8fafc]">
         {/* Activity top bar */}
         <div className="mx-auto max-w-7xl px-4 pt-5 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between gap-3">
             <button
               type="button"
               onClick={() => setSelectedActivity(null)}
-              className="inline-flex items-center gap-2 rounded-lg px-2 py-2 text-sm font-semibold text-gray-600 transition hover:bg-gray-100 hover:text-gray-900"
+              className="inline-flex min-w-0 items-center gap-2 rounded-lg px-2 py-2 text-sm font-semibold text-gray-600 transition hover:bg-gray-100 hover:text-gray-900"
             >
-              <ArrowLeft size={18} />
-              <span>Back to {destination.name}</span>
+              <ArrowLeft size={18} className="shrink-0" />
+              <span className="truncate">Back to {destination.name}</span>
             </button>
 
             <button
               type="button"
               onClick={() => setSelectedActivity(null)}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-600 shadow-sm transition hover:bg-gray-100 hover:text-gray-900"
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-600 shadow-sm transition hover:bg-gray-100 hover:text-gray-900"
               aria-label="Close activity"
             >
               <X size={20} />
@@ -631,25 +631,27 @@ ${shareUrl}`;
 
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-              <div className="absolute inset-x-0 bottom-0 p-5 sm:p-8 lg:p-10">
+              <div className="absolute inset-x-0 bottom-0 p-4 sm:p-8 lg:p-10">
                 <div className="mb-3 inline-flex rounded-full bg-white/90 px-3 py-1 text-sm font-semibold text-gray-800 backdrop-blur">
                   Things To Do
                 </div>
 
-                <h1 className="max-w-4xl text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl">
+                <h1 className="max-w-4xl break-words text-2xl font-extrabold tracking-tight text-white min-[380px]:text-3xl sm:text-4xl lg:text-5xl">
                   {selectedActivity.name}
                 </h1>
 
-                <div className="mt-3 flex flex-wrap items-center gap-3 text-sm text-white/90">
+                <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-white/90">
                   <span className="flex items-center gap-1.5">
-                    <MapPin size={16} />
+                    <MapPin size={16} className="shrink-0" />
                     {destination.name}
                   </span>
 
                   {destination.location && (
                     <>
-                      <span className="text-white/50">•</span>
-                      <span>{destination.location}</span>
+                      <span className="hidden text-white/50 sm:inline">•</span>
+                      <span className="break-words">
+                        {destination.location}
+                      </span>
                     </>
                   )}
                 </div>
@@ -658,34 +660,34 @@ ${shareUrl}`;
 
             {/* Quick information */}
             <div className="grid grid-cols-2 divide-x divide-y divide-gray-200 sm:grid-cols-4 sm:divide-y-0">
-              <div className="p-5 sm:p-6">
+              <div className="min-w-0 p-4 sm:p-6">
                 <p className="text-sm text-gray-500">Price</p>
 
-                <p className="mt-1 text-lg font-bold text-gray-900">
+                <p className="mt-1 break-words text-base font-bold text-gray-900 sm:text-lg">
                   {selectedActivity.price || "Not available"}
                 </p>
               </div>
 
-              <div className="p-5 sm:p-6">
+              <div className="min-w-0 p-4 sm:p-6">
                 <p className="text-sm text-gray-500">Timing</p>
 
-                <p className="mt-1 text-lg font-bold text-gray-900">
+                <p className="mt-1 break-words text-base font-bold text-gray-900 sm:text-lg">
                   {selectedActivity.timing || "Not available"}
                 </p>
               </div>
 
-              <div className="p-5 sm:p-6">
+              <div className="min-w-0 p-4 sm:p-6">
                 <p className="text-sm text-gray-500">Best Time</p>
 
-                <p className="mt-1 text-lg font-bold text-gray-900">
+                <p className="mt-1 break-words text-base font-bold text-gray-900 sm:text-lg">
                   {selectedActivity.bestTime || "Not available"}
                 </p>
               </div>
 
-              <div className="p-5 sm:p-6">
+              <div className="min-w-0 p-4 sm:p-6">
                 <p className="text-sm text-gray-500">Rating</p>
 
-                <p className="mt-1 text-lg font-bold text-gray-900">
+                <p className="mt-1 break-words text-base font-bold text-gray-900 sm:text-lg">
                   ⭐ {selectedActivity.rating ?? 0}
                 </p>
               </div>
@@ -693,17 +695,17 @@ ${shareUrl}`;
           </section>
 
           {/* About activity */}
-          <section className="mt-8 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-gray-200 sm:p-8">
+          <section className="mt-6 rounded-3xl bg-white p-5 shadow-sm ring-1 ring-gray-200 sm:mt-8 sm:p-8">
             <div className="max-w-4xl">
               <p className="text-sm font-semibold uppercase tracking-wider text-blue-600">
                 Experience
               </p>
 
-              <h2 className="mt-1 text-2xl font-bold text-gray-900 sm:text-3xl">
+              <h2 className="mt-1 text-xl font-bold text-gray-900 sm:text-3xl">
                 About This Activity
               </h2>
 
-              <p className="mt-4 text-base leading-8 text-gray-600">
+              <p className="mt-4 break-words text-base leading-7 text-gray-600 sm:leading-8">
                 {selectedActivity.description ||
                   "Experience this activity and explore what this destination has to offer."}
               </p>
@@ -712,19 +714,19 @@ ${shareUrl}`;
 
           {/* Activity gallery */}
           {allActivityImages.length > 0 && (
-            <section className="mt-8 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-gray-200 sm:p-8">
+            <section className="mt-6 rounded-3xl bg-white p-5 shadow-sm ring-1 ring-gray-200 sm:mt-8 sm:p-8">
               <div className="mb-6 flex items-end justify-between gap-4">
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-wider text-blue-600">
                     Photos
                   </p>
 
-                  <h2 className="mt-1 text-2xl font-bold text-gray-900 sm:text-3xl">
+                  <h2 className="mt-1 text-xl font-bold text-gray-900 sm:text-3xl">
                     Activity Gallery
                   </h2>
                 </div>
 
-                <span className="rounded-full bg-gray-100 px-3 py-1 text-sm font-semibold text-gray-600">
+                <span className="shrink-0 rounded-full bg-gray-100 px-3 py-1 text-sm font-semibold text-gray-600">
                   {allActivityImages.length}{" "}
                   {allActivityImages.length === 1 ? "Photo" : "Photos"}
                 </span>
@@ -741,8 +743,8 @@ ${shareUrl}`;
                     }}
                     className={`group relative overflow-hidden rounded-2xl ${
                       index === 0
-                        ? "col-span-2 row-span-2 h-[360px] sm:h-[420px] lg:col-span-2 lg:h-[500px]"
-                        : "h-44 sm:h-52"
+                        ? "col-span-2 row-span-2 h-64 sm:h-[420px] lg:col-span-2 lg:h-[500px]"
+                        : "h-36 sm:h-52"
                     }`}
                   >
                     <img
@@ -757,7 +759,7 @@ ${shareUrl}`;
                     <div className="absolute inset-0 bg-black/0 transition group-hover:bg-black/20" />
 
                     {index === 0 && (
-                      <div className="absolute bottom-4 left-4 rounded-full bg-black/60 px-4 py-2 text-sm font-semibold text-white backdrop-blur">
+                      <div className="absolute bottom-3 left-3 rounded-full bg-black/60 px-3 py-1.5 text-xs font-semibold text-white backdrop-blur sm:bottom-4 sm:left-4 sm:px-4 sm:py-2 sm:text-sm">
                         View Gallery
                       </div>
                     )}
@@ -771,7 +773,7 @@ ${shareUrl}`;
                       setSelectedImage(allActivityImages[3]);
                       setSelectedImageIndex(3);
                     }}
-                    className="group relative h-44 overflow-hidden rounded-2xl sm:h-52"
+                    className="group relative h-36 overflow-hidden rounded-2xl sm:h-52"
                   >
                     <img
                       src={allActivityImages[3]}
@@ -799,13 +801,13 @@ ${shareUrl}`;
 
           {/* Activity videos */}
           {activityVideos.length > 0 && (
-            <section className="mt-8 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-gray-200 sm:p-8">
+            <section className="mt-6 rounded-3xl bg-white p-5 shadow-sm ring-1 ring-gray-200 sm:mt-8 sm:p-8">
               <div className="mb-6">
                 <p className="text-sm font-semibold uppercase tracking-wider text-blue-600">
                   Watch
                 </p>
 
-                <h2 className="mt-1 text-2xl font-bold text-gray-900 sm:text-3xl">
+                <h2 className="mt-1 text-xl font-bold text-gray-900 sm:text-3xl">
                   Activity Videos
                 </h2>
 
@@ -876,16 +878,16 @@ ${shareUrl}`;
 
           {/* Safety tips */}
           {selectedActivity.safetyTips && (
-            <section className="mt-8 rounded-3xl border border-yellow-200 bg-yellow-50 p-6 sm:p-8">
+            <section className="mt-6 rounded-3xl border border-yellow-200 bg-yellow-50 p-5 sm:mt-8 sm:p-8">
               <p className="text-sm font-semibold uppercase tracking-wider text-yellow-700">
                 Travel Safety
               </p>
 
-              <h2 className="mt-1 text-2xl font-bold text-yellow-900">
+              <h2 className="mt-1 text-xl font-bold text-yellow-900 sm:text-2xl">
                 Safety Tips
               </h2>
 
-              <p className="mt-3 max-w-5xl leading-7 text-yellow-900/80">
+              <p className="mt-3 max-w-5xl break-words leading-7 text-yellow-900/80">
                 {selectedActivity.safetyTips}
               </p>
             </section>
@@ -893,7 +895,7 @@ ${shareUrl}`;
 
           {/* No media */}
           {allActivityImages.length === 0 && activityVideos.length === 0 && (
-            <section className="mt-8 rounded-3xl bg-white p-8 text-center shadow-sm ring-1 ring-gray-200">
+            <section className="mt-6 rounded-3xl bg-white p-6 text-center shadow-sm ring-1 ring-gray-200 sm:mt-8 sm:p-8">
               <Image size={42} className="mx-auto text-gray-300" />
 
               <h3 className="mt-3 text-lg font-bold text-gray-800">
@@ -912,10 +914,10 @@ ${shareUrl}`;
             <button
               type="button"
               onClick={() => setSelectedActivity(null)}
-              className="flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white shadow-sm transition hover:bg-blue-700"
+              className="flex max-w-full items-center gap-2 rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white shadow-sm transition hover:bg-blue-700 sm:px-6"
             >
-              <ArrowLeft size={18} />
-              Back to {destination.name}
+              <ArrowLeft size={18} className="shrink-0" />
+              <span className="truncate">Back to {destination.name}</span>
             </button>
           </div>
         </main>
@@ -933,7 +935,7 @@ ${shareUrl}`;
                 e.stopPropagation();
                 setSelectedImage(null);
               }}
-              className="absolute right-5 top-5 z-[110] flex h-12 w-12 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur transition hover:bg-white/30"
+              className="absolute right-3 top-3 z-[110] flex h-11 w-11 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur transition hover:bg-white/30 sm:right-5 sm:top-5 sm:h-12 sm:w-12"
               aria-label="Close image viewer"
             >
               <X size={28} />
@@ -946,7 +948,7 @@ ${shareUrl}`;
                   e.stopPropagation();
                   prevImage();
                 }}
-                className="absolute left-4 top-1/2 z-[110] flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur transition hover:bg-white/30 sm:left-8"
+                className="absolute left-2 top-1/2 z-[110] flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur transition hover:bg-white/30 sm:left-8 sm:h-12 sm:w-12"
                 aria-label="Previous image"
               >
                 <ChevronLeft size={30} />
@@ -967,7 +969,7 @@ ${shareUrl}`;
                   e.stopPropagation();
                   nextImage();
                 }}
-                className="absolute right-4 top-1/2 z-[110] flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur transition hover:bg-white/30 sm:right-8"
+                className="absolute right-2 top-1/2 z-[110] flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur transition hover:bg-white/30 sm:right-8 sm:h-12 sm:w-12"
                 aria-label="Next image"
               >
                 <ChevronRight size={30} />
@@ -975,7 +977,7 @@ ${shareUrl}`;
             )}
 
             {viewerImages.length > 0 && (
-              <div className="absolute bottom-6 left-1/2 z-[110] -translate-x-1/2 rounded-full bg-black/60 px-4 py-2 text-sm font-semibold text-white backdrop-blur">
+              <div className="absolute bottom-4 left-1/2 z-[110] -translate-x-1/2 rounded-full bg-black/60 px-4 py-2 text-sm font-semibold text-white backdrop-blur sm:bottom-6">
                 {selectedImageIndex + 1} / {viewerImages.length}
               </div>
             )}
@@ -993,24 +995,24 @@ ${shareUrl}`;
     const hasMoreNearbyImages = allNearbyImages.length > 3;
 
     return (
-      <div className="min-h-screen bg-[#f8fafc]">
+      <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-[#f8fafc]">
         {/* Nearby place details */}
         <main className="mx-auto max-w-7xl px-4 pb-16 pt-6 sm:px-6 lg:px-8">
           {/* Back button */}
-          <div className="mb-5 flex items-center justify-between">
+          <div className="mb-5 flex items-center justify-between gap-3">
             <button
               type="button"
               onClick={() => setSelectedNearbyPlace(null)}
-              className="inline-flex items-center gap-2 rounded-lg px-2 py-2 text-sm font-semibold text-gray-600 transition hover:bg-gray-100 hover:text-gray-900"
+              className="inline-flex min-w-0 items-center gap-2 rounded-lg px-2 py-2 text-sm font-semibold text-gray-600 transition hover:bg-gray-100 hover:text-gray-900"
             >
-              <ArrowLeft size={18} />
-              <span>Back to {destination.name}</span>
+              <ArrowLeft size={18} className="shrink-0" />
+              <span className="truncate">Back to {destination.name}</span>
             </button>
 
             <button
               type="button"
               onClick={() => setSelectedNearbyPlace(null)}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-600 shadow-sm transition hover:bg-gray-100 hover:text-gray-900"
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-600 shadow-sm transition hover:bg-gray-100 hover:text-gray-900"
               aria-label="Close nearby place"
             >
               <X size={20} />
@@ -1037,25 +1039,25 @@ ${shareUrl}`;
 
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-              <div className="absolute inset-x-0 bottom-0 p-5 sm:p-8 lg:p-10">
+              <div className="absolute inset-x-0 bottom-0 p-4 sm:p-8 lg:p-10">
                 <div className="mb-3 inline-flex rounded-full bg-white/90 px-3 py-1 text-sm font-semibold text-gray-800 backdrop-blur">
                   Nearby Place
                 </div>
 
-                <h1 className="max-w-4xl text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl">
+                <h1 className="max-w-4xl break-words text-2xl font-extrabold tracking-tight text-white min-[380px]:text-3xl sm:text-4xl lg:text-5xl">
                   {selectedNearbyPlace.name}
                 </h1>
 
-                <div className="mt-3 flex flex-wrap items-center gap-3 text-sm text-white/90">
+                <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-white/90">
                   {selectedNearbyPlace.distance && (
                     <span>{selectedNearbyPlace.distance}</span>
                   )}
 
                   {selectedNearbyPlace.location && (
                     <>
-                      <span className="text-white/50">•</span>
-                      <span className="flex items-center gap-1.5">
-                        <MapPin size={16} />
+                      <span className="hidden text-white/50 sm:inline">•</span>
+                      <span className="flex items-center gap-1.5 break-words">
+                        <MapPin size={16} className="shrink-0" />
                         {selectedNearbyPlace.location}
                       </span>
                     </>
@@ -1066,30 +1068,30 @@ ${shareUrl}`;
 
             {/* Quick information */}
             <div className="grid grid-cols-2 divide-x divide-y divide-gray-200 sm:grid-cols-4 sm:divide-y-0">
-              <div className="p-5 sm:p-6">
+              <div className="min-w-0 p-4 sm:p-6">
                 <p className="text-sm text-gray-500">Distance</p>
-                <p className="mt-1 text-lg font-bold text-gray-900">
+                <p className="mt-1 break-words text-base font-bold text-gray-900 sm:text-lg">
                   {selectedNearbyPlace.distance || "Not available"}
                 </p>
               </div>
 
-              <div className="p-5 sm:p-6">
+              <div className="min-w-0 p-4 sm:p-6">
                 <p className="text-sm text-gray-500">Location</p>
-                <p className="mt-1 text-lg font-bold text-gray-900">
+                <p className="mt-1 break-words text-base font-bold text-gray-900 sm:text-lg">
                   {selectedNearbyPlace.location || "Not available"}
                 </p>
               </div>
 
-              <div className="p-5 sm:p-6">
+              <div className="min-w-0 p-4 sm:p-6">
                 <p className="text-sm text-gray-500">Best Time</p>
-                <p className="mt-1 text-lg font-bold text-gray-900">
+                <p className="mt-1 break-words text-base font-bold text-gray-900 sm:text-lg">
                   {selectedNearbyPlace.bestTime || "Not available"}
                 </p>
               </div>
 
-              <div className="p-5 sm:p-6">
+              <div className="min-w-0 p-4 sm:p-6">
                 <p className="text-sm text-gray-500">Rating</p>
-                <p className="mt-1 text-lg font-bold text-gray-900">
+                <p className="mt-1 break-words text-base font-bold text-gray-900 sm:text-lg">
                   ⭐ {selectedNearbyPlace.rating ?? 0}
                 </p>
               </div>
@@ -1097,27 +1099,27 @@ ${shareUrl}`;
           </section>
 
           {/* About nearby place */}
-          <section className="mt-8 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-gray-200 sm:p-8">
+          <section className="mt-6 rounded-3xl bg-white p-5 shadow-sm ring-1 ring-gray-200 sm:mt-8 sm:p-8">
             <p className="text-sm font-semibold uppercase tracking-wider text-blue-600">
               Explore
             </p>
 
-            <h2 className="mt-1 text-2xl font-bold text-gray-900 sm:text-3xl">
+            <h2 className="mt-1 text-xl font-bold text-gray-900 sm:text-3xl">
               About This Place
             </h2>
 
-            <p className="mt-4 max-w-5xl text-base leading-8 text-gray-600">
+            <p className="mt-4 max-w-5xl break-words text-base leading-7 text-gray-600 sm:leading-8">
               {selectedNearbyPlace.description ||
                 "Explore this nearby place and discover what makes it special."}
             </p>
 
             {selectedNearbyPlace.famousFor && (
-              <div className="mt-6 rounded-2xl bg-blue-50 p-5">
+              <div className="mt-6 rounded-2xl bg-blue-50 p-4 sm:p-5">
                 <p className="text-sm font-semibold text-blue-600">
                   Famous For
                 </p>
 
-                <p className="mt-1 text-base font-medium text-gray-800">
+                <p className="mt-1 break-words text-base font-medium text-gray-800">
                   {selectedNearbyPlace.famousFor}
                 </p>
               </div>
@@ -1126,19 +1128,19 @@ ${shareUrl}`;
 
           {/* Nearby gallery */}
           {allNearbyImages.length > 0 && (
-            <section className="mt-8 rounded-3xl bg-white p-6 shadow-sm ring-1 ring-gray-200 sm:p-8">
+            <section className="mt-6 rounded-3xl bg-white p-5 shadow-sm ring-1 ring-gray-200 sm:mt-8 sm:p-8">
               <div className="mb-6 flex items-end justify-between gap-4">
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-wider text-blue-600">
                     Photos
                   </p>
 
-                  <h2 className="mt-1 text-2xl font-bold text-gray-900 sm:text-3xl">
+                  <h2 className="mt-1 text-xl font-bold text-gray-900 sm:text-3xl">
                     Photo Gallery
                   </h2>
                 </div>
 
-                <span className="rounded-full bg-gray-100 px-3 py-1 text-sm font-semibold text-gray-600">
+                <span className="shrink-0 rounded-full bg-gray-100 px-3 py-1 text-sm font-semibold text-gray-600">
                   {allNearbyImages.length}{" "}
                   {allNearbyImages.length === 1 ? "Photo" : "Photos"}
                 </span>
@@ -1155,8 +1157,8 @@ ${shareUrl}`;
                     }}
                     className={`group relative overflow-hidden rounded-2xl ${
                       index === 0
-                        ? "col-span-2 row-span-2 h-[360px] sm:h-[420px] lg:col-span-2 lg:h-[500px]"
-                        : "h-44 sm:h-52"
+                        ? "col-span-2 row-span-2 h-64 sm:h-[420px] lg:col-span-2 lg:h-[500px]"
+                        : "h-36 sm:h-52"
                     }`}
                   >
                     <img
@@ -1179,7 +1181,7 @@ ${shareUrl}`;
                       setSelectedImage(allNearbyImages[3]);
                       setSelectedImageIndex(3);
                     }}
-                    className="group relative h-44 overflow-hidden rounded-2xl sm:h-52"
+                    className="group relative h-36 overflow-hidden rounded-2xl sm:h-52"
                   >
                     <img
                       src={allNearbyImages[3]}
@@ -1207,7 +1209,7 @@ ${shareUrl}`;
 
           {/* No gallery */}
           {allNearbyImages.length === 0 && (
-            <section className="mt-8 rounded-3xl bg-white p-8 text-center shadow-sm ring-1 ring-gray-200">
+            <section className="mt-6 rounded-3xl bg-white p-6 text-center shadow-sm ring-1 ring-gray-200 sm:mt-8 sm:p-8">
               <Image size={42} className="mx-auto text-gray-300" />
 
               <h3 className="mt-3 text-lg font-bold text-gray-800">
@@ -1225,10 +1227,10 @@ ${shareUrl}`;
             <button
               type="button"
               onClick={() => setSelectedNearbyPlace(null)}
-              className="flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white shadow-sm transition hover:bg-blue-700"
+              className="flex max-w-full items-center gap-2 rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white shadow-sm transition hover:bg-blue-700 sm:px-6"
             >
-              <ArrowLeft size={18} />
-              Back to {destination.name}
+              <ArrowLeft size={18} className="shrink-0" />
+              <span className="truncate">Back to {destination.name}</span>
             </button>
           </div>
         </main>
@@ -1246,7 +1248,7 @@ ${shareUrl}`;
                 e.stopPropagation();
                 setSelectedImage(null);
               }}
-              className="absolute right-5 top-5 z-[110] flex h-12 w-12 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur transition hover:bg-white/30"
+              className="absolute right-3 top-3 z-[110] flex h-11 w-11 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur transition hover:bg-white/30 sm:right-5 sm:top-5 sm:h-12 sm:w-12"
               aria-label="Close image viewer"
             >
               <X size={28} />
@@ -1259,7 +1261,7 @@ ${shareUrl}`;
                   e.stopPropagation();
                   prevImage();
                 }}
-                className="absolute left-4 top-1/2 z-[110] flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur transition hover:bg-white/30 sm:left-8"
+                className="absolute left-2 top-1/2 z-[110] flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur transition hover:bg-white/30 sm:left-8 sm:h-12 sm:w-12"
                 aria-label="Previous image"
               >
                 <ChevronLeft size={30} />
@@ -1280,7 +1282,7 @@ ${shareUrl}`;
                   e.stopPropagation();
                   nextImage();
                 }}
-                className="absolute right-4 top-1/2 z-[110] flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur transition hover:bg-white/30 sm:right-8"
+                className="absolute right-2 top-1/2 z-[110] flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur transition hover:bg-white/30 sm:right-8 sm:h-12 sm:w-12"
                 aria-label="Next image"
               >
                 <ChevronRight size={30} />
@@ -1288,7 +1290,7 @@ ${shareUrl}`;
             )}
 
             {viewerImages.length > 0 && (
-              <div className="absolute bottom-6 left-1/2 z-[110] -translate-x-1/2 rounded-full bg-black/60 px-4 py-2 text-sm font-semibold text-white backdrop-blur">
+              <div className="absolute bottom-4 left-1/2 z-[110] -translate-x-1/2 rounded-full bg-black/60 px-4 py-2 text-sm font-semibold text-white backdrop-blur sm:bottom-6">
                 {selectedImageIndex + 1} / {viewerImages.length}
               </div>
             )}
@@ -1300,10 +1302,10 @@ ${shareUrl}`;
 
   // Normal destination page
   return (
-    <div className="mx-auto max-w-6xl p-5">
+    <div className="mx-auto w-full max-w-6xl overflow-x-hidden p-3 sm:p-5">
       {/* Toast */}
       {toastMessage && (
-        <div className="fixed right-5 top-5 z-50 rounded-lg bg-black px-5 py-3 text-white shadow-lg">
+        <div className="fixed left-3 right-3 top-3 z-50 rounded-lg bg-black px-4 py-3 text-center text-sm text-white shadow-lg sm:left-auto sm:right-5 sm:top-5 sm:px-5 sm:text-left sm:text-base">
           {toastMessage}
         </div>
       )}
@@ -1313,19 +1315,19 @@ ${shareUrl}`;
         <img
           src={destination.image}
           alt={destination.name}
-          className="h-96 w-full rounded-xl object-cover"
+          className="h-64 w-full rounded-xl object-cover sm:h-80 md:h-96"
           onError={(e) => {
             e.currentTarget.style.display = "none";
           }}
         />
 
         {/* Floating buttons */}
-        <div className="absolute bottom-5 right-5 flex items-center gap-3">
+        <div className="absolute bottom-3 right-3 flex items-center gap-2 sm:bottom-5 sm:right-5 sm:gap-3">
           {/* Wishlist */}
           <button
             onClick={handleWishlist}
             title={isWishlisted ? "Remove from Wishlist" : "Add to Wishlist"}
-            className="flex h-14 w-14 items-center justify-center rounded-full bg-white shadow-xl transition-all duration-300 hover:scale-110 hover:shadow-2xl active:scale-95"
+            className="flex h-11 w-11 items-center justify-center rounded-full bg-white shadow-xl transition-all duration-300 hover:scale-110 hover:shadow-2xl active:scale-95 sm:h-14 sm:w-14"
           >
             <Heart
               size={26}
@@ -1339,7 +1341,7 @@ ${shareUrl}`;
           <button
             onClick={handleShare}
             title="Share on WhatsApp"
-            className="flex h-14 w-14 items-center justify-center rounded-full bg-white shadow-xl transition-all duration-300 hover:scale-110 hover:shadow-2xl active:scale-95"
+            className="flex h-11 w-11 items-center justify-center rounded-full bg-white shadow-xl transition-all duration-300 hover:scale-110 hover:shadow-2xl active:scale-95 sm:h-14 sm:w-14"
           >
             <FaWhatsapp size={26} className="text-[#25D366]" />
           </button>
@@ -1347,25 +1349,27 @@ ${shareUrl}`;
       </div>
 
       {/* Destination name */}
-      <h1 className="mt-5 text-4xl font-bold">{destination.name}</h1>
+      <h1 className="mt-5 break-words text-2xl font-bold sm:text-3xl md:text-4xl">
+        {destination.name}
+      </h1>
 
       {/* Category */}
       <p className="mt-2 font-semibold text-blue-600">{destination.category}</p>
 
       {/* Description */}
-      <p className="mt-3 leading-relaxed text-gray-700">
+      <p className="mt-3 break-words leading-relaxed text-gray-700">
         {destination.description}
       </p>
 
       {/* Destination information */}
-      <div className="mt-6 space-y-4">
+      <div className="mt-6 space-y-4 break-words">
         {/* Location */}
         <div>
           <div className="flex flex-wrap items-center gap-2">
-            <p className="flex items-center gap-1.5">
+            <p className="flex flex-wrap items-center gap-1.5">
               <b>Location:</b>
 
-              <MapPin size={16} className="text-red-500" />
+              <MapPin size={16} className="shrink-0 text-red-500" />
 
               {destination.location || "Not available"}
             </p>
@@ -1404,9 +1408,9 @@ ${shareUrl}`;
       {/* Destination gallery */}
       {galleryImages.length > 0 && (
         <div className="mt-10">
-          <h2 className="mb-5 text-2xl font-bold">Gallery</h2>
+          <h2 className="mb-5 text-xl font-bold sm:text-2xl">Gallery</h2>
 
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
             {visibleImages.map((image, index) => {
               return (
                 <div
@@ -1415,7 +1419,7 @@ ${shareUrl}`;
                     setSelectedImage(image);
                     setSelectedImageIndex(index);
                   }}
-                  className="h-64 cursor-pointer overflow-hidden rounded-xl"
+                  className="h-40 cursor-pointer overflow-hidden rounded-xl sm:h-64"
                 >
                   <img
                     src={image}
@@ -1437,7 +1441,7 @@ ${shareUrl}`;
                   setSelectedImage(galleryImages[3]);
                   setSelectedImageIndex(3);
                 }}
-                className="relative h-64 cursor-pointer overflow-hidden rounded-xl"
+                className="relative h-40 cursor-pointer overflow-hidden rounded-xl sm:h-64"
               >
                 <img
                   src={galleryImages[3]}
@@ -1451,7 +1455,7 @@ ${shareUrl}`;
                 <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/60 text-white">
                   <Image size={35} />
 
-                  <h3 className="text-3xl font-bold">
+                  <h3 className="text-2xl font-bold sm:text-3xl">
                     +{galleryImages.length - 3}
                   </h3>
 
@@ -1476,7 +1480,7 @@ ${shareUrl}`;
       {/* Destination videos */}
       {videos.length > 0 && (
         <div className="mt-10">
-          <h2 className="mb-5 text-2xl font-bold">Short Videos</h2>
+          <h2 className="mb-5 text-xl font-bold sm:text-2xl">Short Videos</h2>
 
           <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
             {visibleVideos.map((video, index) => {
@@ -1533,7 +1537,7 @@ ${shareUrl}`;
         <div className="mt-12">
           {/* Heading */}
           <div className="mb-5">
-            <h2 className="text-3xl font-bold">Things To Do</h2>
+            <h2 className="text-2xl font-bold sm:text-3xl">Things To Do</h2>
 
             <p className="mt-1 text-gray-500">
               Explore activities and experiences at this destination.
@@ -1571,7 +1575,7 @@ ${shareUrl}`;
 
                   {/* Activity content */}
                   <div className="p-4">
-                    <h3 className="text-xl font-bold">
+                    <h3 className="break-words text-xl font-bold">
                       {activity?.name || "Activity"}
                     </h3>
 
@@ -1581,7 +1585,7 @@ ${shareUrl}`;
                       </p>
                     )}
 
-                    <div className="mt-4 space-y-2 text-sm">
+                    <div className="mt-4 space-y-2 break-words text-sm">
                       {activity?.price && (
                         <p>
                           <span className="font-semibold">Price:</span>{" "}
@@ -1629,7 +1633,7 @@ ${shareUrl}`;
       {/* Nearby places */}
       {nearbyPlaces.length > 0 && (
         <div className="mt-12">
-          <h2 className="mb-5 text-2xl font-bold">Nearby Places</h2>
+          <h2 className="mb-5 text-xl font-bold sm:text-2xl">Nearby Places</h2>
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
             {nearbyPlaces.map((place, index) => {
@@ -1655,7 +1659,7 @@ ${shareUrl}`;
                   )}
 
                   {/* Content */}
-                  <div className="p-4">
+                  <div className="break-words p-4">
                     <h3 className="text-xl font-bold">{place.name}</h3>
 
                     {place.description && (
@@ -1697,7 +1701,7 @@ ${shareUrl}`;
           {/* Close */}
           <button
             onClick={() => setSelectedImage(null)}
-            className="absolute right-5 top-5 z-50 rounded-full bg-white/20 p-3 text-white transition hover:bg-white/40"
+            className="absolute right-3 top-3 z-50 rounded-full bg-white/20 p-2.5 text-white transition hover:bg-white/40 sm:right-5 sm:top-5 sm:p-3"
             aria-label="Close image viewer"
           >
             <X size={30} />
@@ -1710,7 +1714,7 @@ ${shareUrl}`;
                 e.stopPropagation();
                 prevImage();
               }}
-              className="absolute left-5 top-1/2 z-50 -translate-y-1/2 rounded-full bg-white/20 p-3 text-white transition hover:bg-white/40"
+              className="absolute left-2 top-1/2 z-50 -translate-y-1/2 rounded-full bg-white/20 p-2.5 text-white transition hover:bg-white/40 sm:left-5 sm:p-3"
               aria-label="Previous image"
             >
               <ChevronLeft size={35} />
@@ -1724,7 +1728,7 @@ ${shareUrl}`;
                 e.stopPropagation();
                 nextImage();
               }}
-              className="absolute right-5 top-1/2 z-50 -translate-y-1/2 rounded-full bg-white/20 p-3 text-white transition hover:bg-white/40"
+              className="absolute right-2 top-1/2 z-50 -translate-y-1/2 rounded-full bg-white/20 p-2.5 text-white transition hover:bg-white/40 sm:right-5 sm:p-3"
               aria-label="Next image"
             >
               <ChevronRight size={35} />
@@ -1740,7 +1744,7 @@ ${shareUrl}`;
           />
 
           {/* Counter */}
-          <div className="absolute bottom-8 rounded-full bg-black/60 px-5 py-2 text-white">
+          <div className="absolute bottom-4 rounded-full bg-black/60 px-5 py-2 text-white sm:bottom-8">
             {selectedImageIndex + 1}/{viewerImages.length}
           </div>
         </div>
