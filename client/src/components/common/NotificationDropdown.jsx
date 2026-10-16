@@ -11,12 +11,12 @@ const NotificationDropdown = ({
   onViewAll,
 }) => {
   return (
-    <div className="absolute right-0 mt-3 w-[calc(100vw-1.5rem)] max-w-[420px] overflow-hidden rounded-xl border border-gray-200 bg-white shadow-2xl sm:w-[420px] sm:rounded-2xl">
+    <div className="fixed inset-x-3 top-28 z-50 flex max-h-[calc(100dvh-9rem)] flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-2xl sm:absolute sm:inset-x-auto sm:right-0 sm:top-auto sm:mt-3 sm:max-h-none sm:w-[420px] sm:rounded-2xl">
       {/* Header */}
 
-      <div className="border-b bg-gradient-to-r from-blue-50 to-white px-4 py-4 sm:px-6 sm:py-5">
+      <div className="shrink-0 border-b bg-gradient-to-r from-blue-50 to-white px-4 py-4 sm:px-6 sm:py-5">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-blue-100 sm:h-11 sm:w-11">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-100 sm:h-11 sm:w-11">
             <Bell className="h-5 w-5 text-blue-600" />
           </div>
 
@@ -41,10 +41,10 @@ const NotificationDropdown = ({
 
       {/* Notification Body */}
 
-      <div className="max-h-[60vh] overflow-y-auto sm:max-h-[430px]">
-        {/* Loading */}
-
+      <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain sm:max-h-[430px] sm:flex-none">
         {loading ? (
+          /* Loading */
+
           <div className="flex flex-col items-center justify-center px-4 py-12 sm:py-14">
             <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
 
@@ -55,7 +55,7 @@ const NotificationDropdown = ({
         ) : notifications.length === 0 ? (
           /* Empty State */
 
-          <div className="flex flex-col items-center px-4 py-10 sm:px-6 sm:py-14">
+          <div className="flex flex-col items-center px-4 py-8 sm:px-6 sm:py-14">
             <div className="flex h-14 w-14 items-center justify-center rounded-full bg-blue-100 sm:h-16 sm:w-16">
               <Bell className="h-7 w-7 text-blue-600 sm:h-8 sm:w-8" />
             </div>
@@ -89,7 +89,7 @@ const NotificationDropdown = ({
       {/* Footer */}
 
       {notifications.length > 0 && (
-        <div className="border-t border-gray-100 bg-gray-50 px-3 py-3 sm:px-5 sm:py-4">
+        <div className="shrink-0 border-t border-gray-100 bg-gray-50 px-3 py-3 sm:px-5 sm:py-4">
           <button
             onClick={onViewAll}
             className="w-full rounded-lg bg-blue-600 px-3 py-3 text-sm font-semibold text-white transition-all duration-200 hover:bg-blue-700 hover:shadow-md sm:rounded-xl"
