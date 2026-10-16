@@ -21,9 +21,11 @@ function NearbyPlaceDetails() {
 
   const fetchNearbyPlace = async () => {
     try {
-      const response = await getDestinationById(id);
+      setLoading(true);
 
+      const response = await getDestinationById(id);
       const destinationData = response.data;
+
       setDestination(destinationData);
 
       const place = destinationData?.nearbyPlaces?.[Number(placeIndex)];
@@ -35,17 +37,22 @@ function NearbyPlaceDetails() {
       }
     } catch (error) {
       console.log(error);
+      setNearbyPlace(null);
     } finally {
       setLoading(false);
     }
   };
 
-  if (loading) return <Loader />;
+  if (loading) {
+    return <Loader />;
+  }
 
   if (!nearbyPlace) {
     return (
-      <div className="p-10 text-center text-2xl font-semibold">
-        Nearby Place Not Found
+      <div className="flex min-h-[50vh] items-center justify-center px-4 py-10 text-center">
+        <p className="text-xl font-semibold text-gray-700 sm:text-2xl">
+          Nearby Place Not Found
+        </p>
       </div>
     );
   }
@@ -57,137 +64,177 @@ function NearbyPlaceDetails() {
     ? galleryImages
     : galleryImages.slice(0, 3);
 
-  const visibleVideos = showAllVideos ? videos : videos.slice(0, 3);
+  const visibleVideos = showAllVideos
+    ? videos
+    : videos.slice(0, 3);
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
-      {/* Main Image */}
-      <img
-        src={nearbyPlace.image}
-        alt={nearbyPlace.name}
-        className="w-full h-96 object-cover rounded-xl"
-      />
+    <div className="w-full min-w-0 overflow-x-hidden px-3 py-5 sm:px-6 sm:py-8 lg:px-8">
+      <div className="mx-auto w-full max-w-6xl min-w-0">
+        {/* Main Image */}
+        <div className="w-full overflow-hidden rounded-xl sm:rounded-2xl">
+          <img
+            src={nearbyPlace.image}
+            alt={nearbyPlace.name}
+            className="h-56 w-full object-cover sm:h-80 md:h-96"
+          />
+        </div>
 
-      {/* Title */}
-      <h1 className="text-4xl font-bold mt-6">{nearbyPlace.name}</h1>
+        {/* Title */}
+        <h1 className="mt-5 break-words text-2xl font-bold leading-tight text-gray-900 sm:mt-6 sm:text-3xl lg:text-4xl">
+          {nearbyPlace.name}
+        </h1>
 
-      <p className="text-gray-700 mt-4">{nearbyPlace.description}</p>
-
-      {/* Details */}
-      <div className="mt-6 space-y-2">
-        <p>
-          <b>Distance:</b> {nearbyPlace.distance}
+        {/* Description */}
+        <p className="mt-3 break-words text-sm leading-7 text-gray-700 sm:mt-4 sm:text-base sm:leading-8">
+          {nearbyPlace.description}
         </p>
 
-        <p>
-          <b>Location:</b> {nearbyPlace.location}
-        </p>
+        {/* Details */}
+        <div className="mt-5 grid grid-cols-1 gap-3 sm:mt-6 sm:grid-cols-2 sm:gap-4 lg:grid-cols-2">
+          <div className="min-w-0 rounded-xl border border-gray-200 bg-white p-4 sm:p-5">
+            <p className="break-words text-sm leading-6 text-gray-700 sm:text-base">
+              <b>Distance:</b> {nearbyPlace.distance || "Not available"}
+            </p>
+          </div>
 
-        <p>
-          <b>Famous For:</b> {nearbyPlace.famousFor}
-        </p>
+          <div className="min-w-0 rounded-xl border border-gray-200 bg-white p-4 sm:p-5">
+            <p className="break-words text-sm leading-6 text-gray-700 sm:text-base">
+              <b>Location:</b> {nearbyPlace.location || "Not available"}
+            </p>
+          </div>
 
-        <p>
-          <b>Best Time:</b> {nearbyPlace.bestTime}
-        </p>
+          <div className="min-w-0 rounded-xl border border-gray-200 bg-white p-4 sm:p-5">
+            <p className="break-words text-sm leading-6 text-gray-700 sm:text-base">
+              <b>Famous For:</b> {nearbyPlace.famousFor || "Not available"}
+            </p>
+          </div>
 
-        <p>
-          <b>Budget:</b> {nearbyPlace.budget}
-        </p>
+          <div className="min-w-0 rounded-xl border border-gray-200 bg-white p-4 sm:p-5">
+            <p className="break-words text-sm leading-6 text-gray-700 sm:text-base">
+              <b>Best Time:</b> {nearbyPlace.bestTime || "Not available"}
+            </p>
+          </div>
 
-        <p>
-          <b>Rating:</b> ⭐ {nearbyPlace.rating}
-        </p>
+          <div className="min-w-0 rounded-xl border border-gray-200 bg-white p-4 sm:p-5">
+            <p className="break-words text-sm leading-6 text-gray-700 sm:text-base">
+              <b>Budget:</b> {nearbyPlace.budget || "Not available"}
+            </p>
+          </div>
 
-        <p>
-          <b>Travel Tips:</b> {nearbyPlace.travelTips}
-        </p>
-      </div>
+          <div className="min-w-0 rounded-xl border border-gray-200 bg-white p-4 sm:p-5">
+            <p className="break-words text-sm leading-6 text-gray-700 sm:text-base">
+              <b>Rating:</b> ⭐ {nearbyPlace.rating ?? "Not available"}
+            </p>
+          </div>
 
-      {/* Gallery */}
-      {galleryImages.length > 0 && (
-        <div className="mt-10">
-          <h2 className="text-2xl font-bold mb-5 flex items-center gap-2">
-            <Image size={25} />
-            Gallery
-          </h2>
+          <div className="min-w-0 rounded-xl border border-gray-200 bg-white p-4 sm:p-5 sm:col-span-2">
+            <p className="break-words text-sm leading-7 text-gray-700 sm:text-base">
+              <b>Travel Tips:</b>{" "}
+              {nearbyPlace.travelTips || "No travel tips available"}
+            </p>
+          </div>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
-            {visibleImages.map((image, index) => (
-              <img
-                key={index}
-                src={image}
-                alt={`gallery-${index}`}
-                className="w-full h-64 object-cover rounded-xl hover:scale-105 transition"
-              />
-            ))}
+        {/* Gallery */}
+        {galleryImages.length > 0 && (
+          <section className="mt-8 sm:mt-10">
+            <h2 className="mb-4 flex items-center gap-2 text-xl font-bold text-gray-900 sm:mb-5 sm:text-2xl">
+              <Image size={23} className="shrink-0 sm:h-[25px] sm:w-[25px]" />
+              Gallery
+            </h2>
 
-            {!showAllImages && galleryImages.length > 3 && (
-              <div
-                onClick={() => setShowAllImages(true)}
-                className="relative h-64 rounded-xl overflow-hidden cursor-pointer"
-              >
-                <img
-                  src={galleryImages[3]}
-                  alt="More"
-                  className="w-full h-full object-cover"
-                />
-
-                <div className="absolute inset-0 bg-black/60 flex flex-col justify-center items-center text-white">
-                  <Image size={35} />
-
-                  <h3 className="text-3xl font-bold">
-                    +{galleryImages.length - 3}
-                  </h3>
-
-                  <p>More Photos</p>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 md:grid-cols-4">
+              {visibleImages.map((image, index) => (
+                <div
+                  key={`${image}-${index}`}
+                  className="min-w-0 overflow-hidden rounded-xl"
+                >
+                  <img
+                    src={image}
+                    alt={`${nearbyPlace.name} gallery ${index + 1}`}
+                    loading="lazy"
+                    className="h-56 w-full rounded-xl object-cover transition duration-300 hover:scale-105 sm:h-60 md:h-64"
+                  />
                 </div>
-              </div>
+              ))}
+
+              {!showAllImages && galleryImages.length > 3 && (
+                <button
+                  type="button"
+                  onClick={() => setShowAllImages(true)}
+                  aria-label={`Show ${galleryImages.length - 3} more photos`}
+                  className="group relative h-56 w-full min-w-0 overflow-hidden rounded-xl text-left sm:h-60 md:h-64"
+                >
+                  <img
+                    src={galleryImages[3]}
+                    alt="More gallery photos"
+                    loading="lazy"
+                    className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
+                  />
+
+                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/60 px-3 text-center text-white transition group-hover:bg-black/70">
+                    <Image size={32} />
+
+                    <h3 className="mt-2 text-2xl font-bold sm:text-3xl">
+                      +{galleryImages.length - 3}
+                    </h3>
+
+                    <p className="text-sm sm:text-base">More Photos</p>
+                  </div>
+                </button>
+              )}
+            </div>
+
+            {showAllImages && (
+              <button
+                type="button"
+                onClick={() => setShowAllImages(false)}
+                className="mt-4 rounded-lg py-2 font-semibold text-blue-600 hover:text-blue-700 sm:mt-5"
+              >
+                Show Less
+              </button>
             )}
-          </div>
+          </section>
+        )}
 
-          {showAllImages && (
-            <button
-              onClick={() => setShowAllImages(false)}
-              className="mt-5 text-blue-600 font-semibold"
-            >
-              Show Less
-            </button>
-          )}
-        </div>
-      )}
+        {/* Videos */}
+        {videos.length > 0 && (
+          <section className="mt-8 sm:mt-10">
+            <h2 className="mb-4 flex items-center gap-2 text-xl font-bold text-gray-900 sm:mb-5 sm:text-2xl">
+              <Video size={23} className="shrink-0 sm:h-[25px] sm:w-[25px]" />
+              Short Videos
+            </h2>
 
-      {/* Videos */}
-      {videos.length > 0 && (
-        <div className="mt-10">
-          <h2 className="text-2xl font-bold mb-5 flex items-center gap-2">
-            <Video size={25} />
-            Short Videos
-          </h2>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 md:grid-cols-3">
+              {visibleVideos.map((video, index) => (
+                <div
+                  key={`${video}-${index}`}
+                  className="relative w-full min-w-0 overflow-hidden rounded-xl border bg-white"
+                >
+                  <iframe
+                    src={video}
+                    title={`video-${index + 1}`}
+                    className="aspect-video w-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+              ))}
+            </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {visibleVideos.map((video, index) => (
-              <iframe
-                key={index}
-                src={video}
-                title={`video-${index}`}
-                className="w-full h-64 rounded-xl border"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            ))}
-          </div>
-
-          {videos.length > 3 && (
-            <button
-              onClick={() => setShowAllVideos(!showAllVideos)}
-              className="mt-5 px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
-            >
-              {showAllVideos ? "Show Less" : "More Videos"}
-            </button>
-          )}
-        </div>
-      )}
+            {videos.length > 3 && (
+              <button
+                type="button"
+                onClick={() => setShowAllVideos(!showAllVideos)}
+                className="mt-4 rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700 sm:mt-5 sm:text-base"
+              >
+                {showAllVideos ? "Show Less" : "More Videos"}
+              </button>
+            )}
+          </section>
+        )}
+      </div>
     </div>
   );
 }
